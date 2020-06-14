@@ -1,7 +1,10 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native'
 import {AsyncStorage} from 'react-native'
 
+import { ApolloProvider } from '@apollo/react-hooks';
+import {client} from './src/Config/Graphql';
+
+import { NavigationContainer } from '@react-navigation/native'
 import RootStackScreen from './src/Navigation'
 import {ProfileContext} from './src/Context'
 import Splash from './src/Screens/Splash'
@@ -10,7 +13,7 @@ export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
   const [profile, setProfile] = React.useState()
 
-  const profileContext = React.useMemo(() => {
+  const ProfileMemo = React.useMemo(() => {
     return({
       setProfile: async (data) => {
         await AsyncStorage.setItem('profile', data)
@@ -39,10 +42,12 @@ export default function App() {
   }
   
   return (
-    <ProfileContext.Provider value = {profileContext}>
-      <NavigationContainer>
-        <RootStackScreen profile={profile}/>
-      </NavigationContainer>
-    </ProfileContext.Provider>
-  );
+    <ApolloProvider client={client}>
+      <ProfileContext.Provider value = {ProfileMemo}>
+        <NavigationContainer>
+          <RootStackScreen profile={profile}/>
+        </NavigationContainer>
+      </ProfileContext.Provider>  
+    </ApolloProvider>
+    );
 }

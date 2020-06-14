@@ -9,7 +9,7 @@ const MainStack = createStackNavigator()
 
 const MainStackScreen = () => {
   return(
-    <MainStack.Navigator headerMode='none'>
+    <MainStack.Navigator>
       <MainStack.Screen name='Home' component={Home}/>
       <MainStack.Screen name='Post' component={Post}/>
       <MainStack.Screen name='PostForm' component={PostForm}/>
