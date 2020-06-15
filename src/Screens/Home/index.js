@@ -10,6 +10,7 @@ const POST_LIST = gql`
   query($cursor: ID){
     justPostList(first: 2, after: $cursor){
       id
+      name
       body
     }
   }
@@ -39,9 +40,13 @@ export default ({navigation}) => {
           title='Log Out'
           onPress={() => removeProfile()}
         />
+        <Button
+          title='New Post'
+          onPress={()=>navigation.navigate('PostForm')}
+        />
       </>}
       data={data.justPostList}
-      renderItem={({item}) => <Text style={{fontSize:60}}>{item.id+'\n'+item.body}</Text>}
+      renderItem={({item}) => <Text style={{fontSize:60}}>{item.id+'\n'+item.name+'\n'+item.body+'\n'}</Text>}
       onEndReached={() => {
         fetchMore({
           variables:{
@@ -55,10 +60,7 @@ export default ({navigation}) => {
         })
       }}
       ListFooterComponent={<>
-        <Button
-          title='New Post'
-          onPress={()=>navigation.navigate('PostForm')}
-        />
+        
       </>}
     />
   );

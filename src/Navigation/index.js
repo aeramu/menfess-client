@@ -12,7 +12,9 @@ const MainStackScreen = () => {
     <MainStack.Navigator>
       <MainStack.Screen name='Home' component={Home}/>
       <MainStack.Screen name='Post' component={Post}/>
-      <MainStack.Screen name='PostForm' component={PostForm}/>
+      <MainStack.Screen name='PostForm' component={PostForm} options={{
+        title: ""
+      }}/>
     </MainStack.Navigator>
   )
 }
