@@ -1,0 +1,59 @@
+import React from 'react'
+import { View, ActivityIndicator, FlatList } from 'react-native'
+
+import {gql} from 'apollo-boost'
+import {useQuery} from '@apollo/react-hooks'
+
+import PostCard from '../../Components/PostCard'
+import { Divider } from 'react-native-elements'
+
+POST_QUERY = gql`
+  query($id: ID!){
+    justPost(id: $id){
+      child{
+        id
+        timestamp
+        name
+        body
+      }
+    }
+  }
+`
+export default ({navigation, route}) => {
+  const {post} = route.params
+  const {data, loading, refetch, networkStatus} = useQuery(POST_QUERY,{
+    variables:{
+      id: post.id
+    }
+  })
+
+  if (loading) return (
+    <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+      <ActivityIndicator size={50}/>
+    </View>
+  )
+
+  const handlePostClick = (post) => {
+    navigation.push('Post', {post})
+  }
+
+  return (
+    <View style={{flex:1}}>
+      <FlatList
+        refreshing={networkStatus === 4}
+        onRefresh={() => refetch()}
+        // onEndReached={morePost()}
+        data={data.justPost.child}
+        ListHeaderComponent={() =>
+          <> 
+            <PostCard post={post} onPress={() => {}}/>
+            <Divider style={{backgroundColor:'light-grey', height:20}}/>
+          </>
+        }
+        renderItem={({item}) => 
+          <PostCard post={item} onPress={handlePostClick}/>
+        }
+      />
+    </View>
+  );
+}

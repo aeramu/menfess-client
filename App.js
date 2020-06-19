@@ -1,13 +1,12 @@
 import React from 'react';
 import {AsyncStorage} from 'react-native'
+import {ApolloProvider} from '@apollo/react-hooks'
 
-import { ApolloProvider } from '@apollo/react-hooks';
 import {client} from './src/Config/Graphql';
-
-import { NavigationContainer } from '@react-navigation/native'
-import RootStackScreen from './src/Navigation'
 import {ProfileContext} from './src/Context'
-import Splash from './src/Screens/Splash'
+
+import Navigator from './src/Navigation'
+import SplashScreen from './src/Screens/SplashScreen'
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
@@ -37,17 +36,15 @@ export default function App() {
 
   if (isLoading){
     return(
-      <Splash/>
+      <SplashScreen/>
     )
   }
   
   return (
     <ApolloProvider client={client}>
       <ProfileContext.Provider value = {ProfileMemo}>
-        <NavigationContainer>
-          <RootStackScreen profile={profile}/>
-        </NavigationContainer>
+        <Navigator profile={profile}/>
       </ProfileContext.Provider>  
     </ApolloProvider>
-    );
+  );
 }

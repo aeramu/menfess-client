@@ -1,11 +1,19 @@
 import React from 'react'
 import {ScrollView, View, AsyncStorage} from 'react-native'
-import {Button, Input, Avatar, Text} from 'react-native-elements'
+import {Button, Input, ListItem, Text} from 'react-native-elements'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 
 
+const POST_PARENT = gql`
+  mutation ($name: String!, $body: String!, $parentID: ID){
+    postJustPost(name: $name, body: $body, parentID: $parentID){
+      id
+      body
+    }
+  }
+`
 const POST = gql`
   mutation ($name: String!, $body: String!){
     postJustPost(name: $name, body: $body){
@@ -15,11 +23,11 @@ const POST = gql`
   }
 `
 
-export default ({navigation}) => {
+export default ({navigation, route}) => {
   const [body, setBody] = React.useState('')
-  const [name, setName] = React.useState('')
+  const [name, setName] = React.useState('anonymous')
 
-  const [postMutation] = useMutation(POST)
+  const [postMutation] = route.params? useMutation(POST_PARENT) : useMutation(POST)
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -38,10 +46,11 @@ export default ({navigation}) => {
       variables:{
         name,
         body,
+        parentID: route.params? route.params.post.id : null 
       }
     })
     .then(() => {
-      navigation.navigate('Home')
+      navigation.goBack()
     })
   }
 
@@ -51,21 +60,15 @@ export default ({navigation}) => {
       setName(profile)
     }
     getName()
-  })
+  },[])
 
   return (
-    <ScrollView style={{flex:1, paddingTop:20, paddingHorizontal:20, backgroundColor:'white'}}>
-      <View style={{flexDirection:'row', alignItems:'center'}}>
-        <Avatar
-          source={{uri:'https://qiup-image.s3.amazonaws.com/profile-photo/default.jpg'}}
-          avatarStyle={{borderRadius:100}}
-          containerStyle={{marginBottom:20}}
-          size={100}
-        />
-        <Text style={{fontSize:40}}>
-          {name}
-        </Text>
-      </View>
+    <ScrollView style={{flex:1, backgroundColor:'white'}}>
+      <ListItem
+        title={name}
+        titleStyle={{fontWeight:'bold'}}
+        leftAvatar={{source:{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'}}}
+      />
       <Input
         inputContainerStyle={{borderWidth:1, justifyContent:'flex-end',height:200}}
         autoFocus={true}
