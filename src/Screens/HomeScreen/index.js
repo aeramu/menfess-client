@@ -12,15 +12,22 @@ import FloatButton from './Components/FloatButton'
 const POST_LIST = gql`
   query($cursor: ID){
     justPostList(first: 20, after: $cursor){
-      id
-      timestamp
-      name
-      body
-      parent{
+      edges{
         id
         timestamp
         name
         body
+        replyCount
+        parent{
+          id
+          timestamp
+          name
+          body
+          replyCount
+        }
+      }
+      pageInfo{
+        endCursor
       }
     }
   }
@@ -34,14 +41,18 @@ export default ({navigation}) => {
   })
 
   const morePost = () => {
-    console.log('fetch more')
+    console.log(data.justPostList.pageInfo.endCursor)
     fetchMore({
       variables:{
-        cursor: data.justPostList[data.justPostList.length-1].id
+        cursor: data.justPostList.pageInfo.endCursor
       },
       updateQuery: (previousResult, {fetchMoreResult}) => {
         return {
-          justPostList: [...previousResult.justPostList,...fetchMoreResult.justPostList]
+          justPostList:{
+            __typename: previousResult.justPostList.__typename,
+            edges: [...previousResult.justPostList.edges,...fetchMoreResult.justPostList.edges],
+            pageInfo: fetchMoreResult.justPostList.pageInfo
+          }
         }
       }
     })
@@ -79,8 +90,10 @@ export default ({navigation}) => {
       <FlatList
         refreshing={networkStatus === 4}
         onRefresh={() => refetch()}
-        //onEndReached={morePost()}
-        data={data.justPostList}
+        onEndReached={() => morePost()}
+        onEndReachedThreshold={0.5}
+        bounces={false}
+        data={data.justPostList.edges}
         renderItem={({item}) => 
           <PostCard post={item} parent onPress={handlePostClick}/>
         }

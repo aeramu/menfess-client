@@ -11,10 +11,13 @@ POST_QUERY = gql`
   query($id: ID!){
     justPost(id: $id){
       child{
-        id
-        timestamp
-        name
-        body
+        edges{
+          id
+          timestamp
+          name
+          body
+          replyCount
+        }
       }
     }
   }
@@ -43,7 +46,7 @@ export default ({navigation, route}) => {
         refreshing={networkStatus === 4}
         onRefresh={() => refetch()}
         // onEndReached={morePost()}
-        data={data.justPost.child}
+        data={data.justPost.child.edges}
         ListHeaderComponent={() =>
           <> 
             <PostCard post={post} onPress={() => {}}/>

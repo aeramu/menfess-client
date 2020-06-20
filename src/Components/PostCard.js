@@ -52,7 +52,7 @@ const PostCardButton = (props) => {
                 containerStyle={{flex:1}}
                 buttonStyle={{paddingBottom:10}} 
                 icon={{name:'arrow-up', type:'font-awesome', color:'grey'}}
-                title='0'
+                title='20'
                 titleStyle={{color:'grey'}}
                 type='clear'
             />
@@ -60,7 +60,7 @@ const PostCardButton = (props) => {
                 containerStyle={{flex:1}} 
                 icon={{name:'arrow-down', type:'font-awesome', color:'grey'}}
                 buttonStyle={{paddingBottom:10}}
-                title='0'
+                title='20'
                 titleStyle={{color:'grey'}}
                 type='clear'
             />
@@ -68,7 +68,7 @@ const PostCardButton = (props) => {
                 containerStyle={{flex:1}} 
                 icon={{name:'comment-o', type:'font-awesome', color:'grey'}} 
                 buttonStyle={{paddingBottom:10}}
-                title='0'
+                title={post.replyCount.toString()}
                 titleStyle={{color:'grey'}}
                 type='clear'
                 onPress={() => navigation.navigate('NewPost',{post})}
