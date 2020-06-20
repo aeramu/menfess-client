@@ -8,7 +8,7 @@ const Post = (props) => {
     const {post} = props
   
     return(
-      <View style= {{paddingBottom:10}}>
+      <View>
         <ListItem
           title={post.name}
           subtitle={moment.unix(post.timestamp).fromNow()}
@@ -28,7 +28,8 @@ export const RoundedPost = (props) => {
         <TouchableOpacity 
             style={{
                 marginHorizontal:20, 
-                marginBottom:20, 
+                marginBottom:10,
+                paddingBottom:10, 
                 borderWidth:0.5, 
                 borderColor:'light-grey', 
                 borderRadius:15, 

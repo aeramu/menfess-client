@@ -6,6 +6,7 @@ import HomeScreen from '../Screens/HomeScreen'
 import PostScreen from '../Screens/PostScreen'
 import NewPostScreen from '../Screens/NewPostScreen'
 import SetProfileScreen from '../Screens/SetProfileScreen'
+import WelcomeScreen from '../Screens/WelcomeScreen'
 
 const MainStack = createStackNavigator()
 
@@ -24,13 +25,14 @@ const MainStackScreen = () => {
   )
 }
 
-const ProfileStack = createStackNavigator()
+const WelcomeStack = createStackNavigator()
 
-const ProfileStackScreen = () => {
+const WelcomeStackScreen = () => {
   return(
-    <ProfileStack.Navigator headerMode='none'>
-      <ProfileStack.Screen name='Profile' component={SetProfileScreen}/>
-    </ProfileStack.Navigator>
+    <WelcomeStack.Navigator headerMode='none'>
+      <WelcomeStack.Screen name='Welcome' component={WelcomeScreen}/>
+      <WelcomeStack.Screen name='Profile' component={SetProfileScreen}/>
+    </WelcomeStack.Navigator>
   )
 }
 
@@ -42,7 +44,7 @@ const RootStackScreen = ({profile}) => {
       {profile ? (
         <RootStack.Screen name='Main' component={MainStackScreen}/>
       ):(
-        <RootStack.Screen name='Profile' component={ProfileStackScreen}/>
+        <RootStack.Screen name='Welcome' component={WelcomeStackScreen}/>
       )}
     </RootStack.Navigator>
   )
