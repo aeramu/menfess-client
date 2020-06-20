@@ -10,29 +10,38 @@ import SplashScreen from './src/Screens/SplashScreen'
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
-  const [profile, setProfile] = React.useState()
+  const [name, setName] = React.useState()
+  const [avatar, setAvatar] = React.useState()
 
   const ProfileMemo = React.useMemo(() => {
     return({
-      setProfile: async (data) => {
-        await AsyncStorage.setItem('profile', data)
-        setProfile(data)
+      setProfile: async (name, avatar) => {
+        await AsyncStorage.setItem('name', name)
+        await AsyncStorage.setItem('avatar', avatar)
+        setName(name)
+        setAvatar(avatar)
       },
       removeProfile: async () => {
-        await AsyncStorage.removeItem('profile')
-        setProfile(null)
-      }
+        await AsyncStorage.removeItem('name')
+        await AsyncStorage.removeItem('avatar')
+        setName(null)
+        setAvatar(null)
+      },
+      profileName: name,
+      profileAvatar: avatar,
     })
   })
 
   React.useEffect(() => {
     const checkProfile = async () => {
-      const item = await AsyncStorage.getItem('profile')
-      setProfile(item)
+      const name = await AsyncStorage.getItem('name')
+      const avatar = await AsyncStorage.getItem('avatar')
+      setName(name)
+      setAvatar(avatar)
       setIsLoading(false)
     }
     checkProfile()
-  })
+  },[])
 
   if (isLoading){
     return(
@@ -43,7 +52,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <ProfileContext.Provider value = {ProfileMemo}>
-        <Navigator profile={profile}/>
+        <Navigator profile={name}/>
       </ProfileContext.Provider>  
     </ApolloProvider>
   );

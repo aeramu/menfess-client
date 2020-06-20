@@ -1,12 +1,11 @@
 import React from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
-import {Avatar} from 'react-native-elements'
+import {Avatar, Button} from 'react-native-elements'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
 import {ProfileContext} from '../../Context'
 
 import PostCard from '../../Components/PostCard'
-//import HeaderButton from './Components/HeaderButton'
 import FloatButton from './Components/FloatButton'
 
 const POST_LIST = gql`
@@ -16,15 +15,9 @@ const POST_LIST = gql`
         id
         timestamp
         name
+        avatar
         body
         replyCount
-        parent{
-          id
-          timestamp
-          name
-          body
-          replyCount
-        }
       }
       pageInfo{
         endCursor
@@ -33,7 +26,7 @@ const POST_LIST = gql`
   }
 `
 export default ({navigation}) => {
-  const {removeProfile} = React.useContext(ProfileContext)
+  const {removeProfile, profileAvatar} = React.useContext(ProfileContext)
   const {loading, data, networkStatus, refetch, fetchMore} = useQuery(POST_LIST,{
     variables:{
       cursor: "ffffffffffffffffffffffff"
@@ -41,7 +34,6 @@ export default ({navigation}) => {
   })
 
   const morePost = () => {
-    console.log(data.justPostList.pageInfo.endCursor)
     fetchMore({
       variables:{
         cursor: data.justPostList.pageInfo.endCursor
@@ -62,10 +54,10 @@ export default ({navigation}) => {
     navigation.setOptions({
       headerRight: () => (
         <Avatar
-          source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'}}
+          source={{uri: profileAvatar}}
           rounded
           containerStyle={{marginRight:20}}
-          onPress={() => removeProfile()}     
+          onPress={() => navigation.navigate('Profile')}     
         />
       )
     })
@@ -94,8 +86,9 @@ export default ({navigation}) => {
         onEndReachedThreshold={0.5}
         bounces={false}
         data={data.justPostList.edges}
+        ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
         renderItem={({item}) => 
-          <PostCard post={item} parent onPress={handlePostClick}/>
+          <PostCard post={item} onPress={handlePostClick}/>
         }
       />
       <FloatButton onPress={handleNewPostClick}/>

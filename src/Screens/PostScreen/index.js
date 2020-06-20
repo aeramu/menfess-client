@@ -15,6 +15,7 @@ POST_QUERY = gql`
           id
           timestamp
           name
+          avatar
           body
           replyCount
         }

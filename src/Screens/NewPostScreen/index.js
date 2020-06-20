@@ -1,22 +1,24 @@
 import React from 'react'
 import {ScrollView, View, AsyncStorage} from 'react-native'
 import {Button, Input, ListItem, Text} from 'react-native-elements'
+import {RoundedPost} from '../../Components/PostCard'
+import {ProfileContext} from '../../Context'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 
 
 const POST_PARENT = gql`
-  mutation ($name: String!, $body: String!, $parentID: ID){
-    postJustPost(name: $name, body: $body, parentID: $parentID){
+  mutation ($name: String!, $body: String!, $avatar: String!, $parentID: ID){
+    postJustPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID){
       id
       body
     }
   }
 `
 const POST = gql`
-  mutation ($name: String!, $body: String!){
-    postJustPost(name: $name, body: $body){
+  mutation ($name: String!, $avatar: String!, $body: String!){
+    postJustPost(name: $name, avatar: $avatar, body: $body){
       id
       body
     }
@@ -24,8 +26,8 @@ const POST = gql`
 `
 
 export default ({navigation, route}) => {
+  const {profileName, profileAvatar} = React.useContext(ProfileContext)
   const [body, setBody] = React.useState('')
-  const [name, setName] = React.useState('anonymous')
 
   const [postMutation] = route.params? useMutation(POST_PARENT) : useMutation(POST)
 
@@ -44,7 +46,8 @@ export default ({navigation, route}) => {
   const handlePost = () => {
     postMutation({
       variables:{
-        name,
+        name: profileName,
+        avatar: profileAvatar,
         body,
         parentID: route.params? route.params.post.id : null 
       }
@@ -54,23 +57,16 @@ export default ({navigation, route}) => {
     })
   }
 
-  React.useEffect(() => {
-    const getName = async () => {
-      const profile = await AsyncStorage.getItem('profile')
-      setName(profile)
-    }
-    getName()
-  },[])
-
   return (
     <ScrollView style={{flex:1, backgroundColor:'white'}}>
+      {route.params ? (<RoundedPost post={route.params.post}/>):(<></>)}
       <ListItem
-        title={name}
+        title={profileName}
         titleStyle={{fontWeight:'bold'}}
-        leftAvatar={{source:{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'}}}
+        leftAvatar={{source:{uri: profileAvatar}}}
       />
       <Input
-        inputContainerStyle={{borderWidth:1, justifyContent:'flex-end',height:200}}
+        inputContainerStyle={{borderWidth:1, justifyContent:'flex-end', height:200}}
         autoFocus={true}
         multiline={true}
         placeholder='Write your post'

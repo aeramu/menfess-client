@@ -19,6 +19,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name='NewPost' component={NewPostScreen} options={{
         title: ''
       }}/>
+      <MainStack.Screen name='Profile' component={SetProfileScreen} headerMode='none'/>
     </MainStack.Navigator>
   )
 }

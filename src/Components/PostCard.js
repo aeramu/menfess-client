@@ -8,7 +8,7 @@ const Post = (props) => {
     const {post} = props
   
     return(
-      <View style= {{paddingBottom:20}}>
+      <View style= {{paddingBottom:10}}>
         <ListItem
           title={post.name}
           subtitle={moment.unix(post.timestamp).fromNow()}
@@ -22,7 +22,7 @@ const Post = (props) => {
     )
 }
 
-const RoundedPost = (props) => {
+export const RoundedPost = (props) => {
     const {post, onPress} = props
     return (
         <TouchableOpacity 
@@ -48,7 +48,7 @@ const PostCardButton = (props) => {
 
     return (
         <View style={{flexDirection:'row', justifyContent:'center'}}>
-            <Button 
+            {/* <Button 
                 containerStyle={{flex:1}}
                 buttonStyle={{paddingBottom:10}} 
                 icon={{name:'arrow-up', type:'font-awesome', color:'grey'}}
@@ -63,7 +63,9 @@ const PostCardButton = (props) => {
                 title='20'
                 titleStyle={{color:'grey'}}
                 type='clear'
-            />
+            /> */}
+            <View style={{flex:1}}/>
+            <View style={{flex:1}}/>
             <Button 
                 containerStyle={{flex:1}} 
                 icon={{name:'comment-o', type:'font-awesome', color:'grey'}} 

@@ -1,18 +1,20 @@
 import React from 'react'
 import {View} from 'react-native'
-import {Button, Text, Input, Avatar} from 'react-native-elements'
+import {Button, Input, Avatar, Text} from 'react-native-elements'
 
 import {ProfileContext} from '../../Context'
 
-export default () => {
-  const [name, setName] = React.useState('')
+export default ({navigation}) => {
+  const {setProfile, profileName, profileAvatar} = React.useContext(ProfileContext)
 
-  const {setProfile} = React.useContext(ProfileContext)
+  const [name, setName] = React.useState(profileName)
+  const [avatar, setAvatar] = React.useState(profileAvatar||'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg')
 
   return (
     <View style={{flex:1, justifyContent:'center', alignItems:'center', padding:20}}>
+      <Text>Choose your identity</Text>
       <Avatar
-        source={{uri:'https://qiup-image.s3.amazonaws.com/profile-photo/default.jpg'}}
+        source={{uri: avatar}}
         avatarStyle={{borderRadius:100}}
         containerStyle={{marginBottom:20}}
         size={100}
@@ -20,13 +22,18 @@ export default () => {
       <Input
         inputContainerStyle={{borderWidth:1, borderRadius:20, paddingHorizontal:15}}
         inputStyle={{fontSize:15}}
+        autoCapitalize='words'
+        value={name}
         placeholder='Name'
         onChangeText={(text) => setName(text)}
       />
       <Button
-        title='NEXT'
+        title='Save'
         buttonStyle={{paddingHorizontal:30, borderRadius: 20}}
-        onPress={() => setProfile(name)}
+        onPress={() => {
+          setProfile(name, avatar)
+          navigation.navigate('Home')
+        }}
       />
     </View>
   );
