@@ -1,6 +1,6 @@
 import React from 'react'
-import {ScrollView, View, AsyncStorage} from 'react-native'
-import {Button, Input, ListItem, Text} from 'react-native-elements'
+import {ScrollView, View} from 'react-native'
+import {Button, Input, Avatar, Divider} from 'react-native-elements'
 import {RoundedPost} from '../../Components/PostCard'
 import {ProfileContext} from '../../Context'
 
@@ -58,20 +58,27 @@ export default ({navigation, route}) => {
   }
 
   return (
-    <ScrollView style={{flex:1, backgroundColor:'white'}}>
-      {route.params ? (<RoundedPost post={route.params.post}/>):(<></>)}
-      <ListItem
-        title={profileName}
-        titleStyle={{fontWeight:'bold'}}
-        leftAvatar={{source:{uri: profileAvatar}}}
-      />
-      <Input
-        inputContainerStyle={{borderWidth:1, justifyContent:'flex-end', height:200}}
-        autoFocus={true}
-        multiline={true}
-        placeholder='Write your post'
-        onChangeText={(text) => setBody(text)}
-      />
+    <ScrollView style={{flex:1, backgroundColor:'white', paddingHorizontal:15, paddingTop:20}}>
+      {route.params ? (
+        <>
+          <RoundedPost post={route.params.post}/>
+        </>
+      ):(<></>)}
+      <View style={{flexDirection:'row', marginTop: 20, marginBottom:30}}>
+        <Avatar
+          size={40}
+          source={{uri: profileAvatar}}
+          rounded 
+        />
+        <Input
+          containerStyle={{flex:1, borderWidth:0.5, borderRadius:10, marginLeft:5, paddingTop:5}}
+          inputContainerStyle={{borderBottomWidth:0, padding:0}}
+          autoFocus={true}
+          multiline={true}
+          placeholder='Write your post'
+          onChangeText={(text) => setBody(text)}
+        />
+      </View>
     </ScrollView>
   );
 }

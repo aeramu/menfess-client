@@ -27,8 +27,6 @@ export const RoundedPost = (props) => {
     return (
         <TouchableOpacity 
             style={{
-                marginHorizontal:20, 
-                marginBottom:10,
                 paddingBottom:10, 
                 borderWidth:0.5, 
                 borderColor:'light-grey', 
