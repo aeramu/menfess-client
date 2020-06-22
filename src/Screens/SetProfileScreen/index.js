@@ -24,14 +24,14 @@ export default ({navigation}) => {
   ]
 
   return (
-    <View style={{flex:1, justifyContent:'flex-start', alignItems:'center', padding:20, backgroundColor:'white'}}>
-      <Text style={{fontSize:30, fontWeight:'bold', marginTop: 20, marginBottom:20}}>
+    <View style={{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:20}}>
+      <Text style={{fontSize:25, fontWeight:'bold', marginBottom:40, color:'#900366'}}>
         Create Your Identity
       </Text>
       <Avatar
         source={{uri: avatar}}
-        avatarStyle={{borderRadius:100}}
-        size={80}
+        rounded
+        size={70}
         showAccessory
         containerStyle={{marginBottom:20}}
         onPress={() => setVisible(true)}
@@ -39,14 +39,14 @@ export default ({navigation}) => {
       <Input
         placeholder='Name'
         value={name}
-        inputContainerStyle={{borderWidth:1, borderRadius:20, paddingHorizontal:15}}
+        inputContainerStyle={{borderWidth:1, borderRadius:20, paddingHorizontal:15, backgroundColor:'white'}}
         inputStyle={{fontSize:15}}
         autoCapitalize='words'
         onChangeText={(text) => setName(text)}
       />
       <Button
         title='Save'
-        buttonStyle={{paddingHorizontal:30, borderRadius: 20}}
+        buttonStyle={{paddingHorizontal:30, borderRadius: 20, backgroundColor:'#900e66', alignSelf:'flex-end'}}
         onPress={() => {
           setProfile(name, avatar)
           navigation.navigate('Home')

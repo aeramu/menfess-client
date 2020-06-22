@@ -64,14 +64,14 @@ export default ({navigation, route}) => {
           <RoundedPost post={route.params.post}/>
         </>
       ):(<></>)}
-      <View style={{flexDirection:'row', marginTop: 20, marginBottom:30}}>
+      <View style={{flexDirection:'row', marginTop: 20}}>
         <Avatar
           size={40}
           source={{uri: profileAvatar}}
           rounded 
         />
         <Input
-          containerStyle={{flex:1, borderWidth:0.5, borderRadius:10, marginLeft:5, paddingTop:5}}
+          // containerStyle={{flex:1}}
           inputContainerStyle={{borderBottomWidth:0}}
           inputStyle={{fontSize:16}}
           autoFocus={true}

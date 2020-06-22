@@ -14,7 +14,7 @@ const MainStackScreen = () => {
   return(
     <MainStack.Navigator>
       <MainStack.Screen name='Home' component={HomeScreen} options={{
-        title: 'Menfess'
+        title: ''
       }}/>
       <MainStack.Screen name='Post' component={PostScreen}/>
       <MainStack.Screen name='NewPost' component={NewPostScreen} options={{

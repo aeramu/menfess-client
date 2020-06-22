@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
-import {Avatar, Button} from 'react-native-elements'
+import {Avatar, Button, Image} from 'react-native-elements'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
 import {ProfileContext} from '../../Context'
@@ -59,6 +59,20 @@ export default ({navigation}) => {
           containerStyle={{marginRight:20}}
           onPress={() => navigation.navigate('Profile')}     
         />
+      ),
+      headerLeft: () => (
+        <View style={{flexDirection:'row'}}>
+          <Avatar
+            source={require('../../../assets/icon.png')}
+            containerStyle={{marginLeft:20, marginRight:10}}  
+            size={25}
+          />
+          <Image
+            source={require('../../../assets/menfess.png')}
+            style={{height:25, width:80}}
+            resizeMode='contain'
+          />
+        </View>
       )
     })
   })
