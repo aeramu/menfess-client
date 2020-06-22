@@ -1,12 +1,12 @@
 import React from 'react';
 import {AsyncStorage} from 'react-native'
 import {ApolloProvider} from '@apollo/react-hooks'
+import {AppLoading} from 'expo'
 
 import {client} from './src/Config/Graphql';
 import {ProfileContext} from './src/Context'
 
 import Navigator from './src/Navigation'
-import SplashScreen from './src/Screens/SplashScreen'
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
@@ -45,7 +45,7 @@ export default function App() {
 
   if (isLoading){
     return(
-      <SplashScreen/>
+      <AppLoading/>
     )
   }
   

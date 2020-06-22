@@ -24,12 +24,14 @@ export default ({navigation}) => {
   ]
 
   return (
-    <View style={{flex:1, justifyContent:'center', alignItems:'center', padding:20}}>
-      <Text>Create your identity</Text>
+    <View style={{flex:1, justifyContent:'flex-start', alignItems:'center', padding:20, backgroundColor:'white'}}>
+      <Text style={{fontSize:30, fontWeight:'bold', marginTop: 20, marginBottom:20}}>
+        Create Your Identity
+      </Text>
       <Avatar
         source={{uri: avatar}}
         avatarStyle={{borderRadius:100}}
-        size={100}
+        size={80}
         showAccessory
         containerStyle={{marginBottom:20}}
         onPress={() => setVisible(true)}
@@ -52,14 +54,14 @@ export default ({navigation}) => {
       />
       <Overlay overlayStyle={{height:400}} isVisible={visible} onBackdropPress={() => setVisible(false)}>
         <FlatList
-          numColumns={2}
+          numColumns={3}
           data={list}
           renderItem={({item}) => 
             <Avatar
               source={{uri: item}}
               avatarStyle={{borderRadius:100}}
               containerStyle={{margin:10}}
-              size={100}
+              size={70}
               onPress={() => {
                 setAvatar(item)
                 setVisible(false)

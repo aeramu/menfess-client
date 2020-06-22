@@ -72,7 +72,8 @@ export default ({navigation, route}) => {
         />
         <Input
           containerStyle={{flex:1, borderWidth:0.5, borderRadius:10, marginLeft:5, paddingTop:5}}
-          inputContainerStyle={{borderBottomWidth:0, padding:0}}
+          inputContainerStyle={{borderBottomWidth:0}}
+          inputStyle={{fontSize:16}}
           autoFocus={true}
           multiline={true}
           placeholder='Write your post'
