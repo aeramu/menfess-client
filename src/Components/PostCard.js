@@ -13,7 +13,7 @@ const Post = (props) => {
           title={post.name}
           subtitle={moment.unix(post.timestamp).fromNow()}
           titleStyle={{fontWeight:'bold'}}
-          leftAvatar={{source:{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'}}}
+          leftAvatar={{source:{uri:post.avatar||'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'}}}
         />
         <Text style={{fontSize:18, marginHorizontal:15}} >
           {post.body}
