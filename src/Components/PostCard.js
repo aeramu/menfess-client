@@ -1,17 +1,18 @@
 import React from 'react'
 import {TouchableOpacity, View} from 'react-native'
-import {Button, Divider, ListItem, Text, Avatar} from 'react-native-elements'
+import {Button, Divider, Text} from 'react-native-elements'
 import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
+
+import Avatar from './Avatar'
 
 const PostCardHeader = (props) => {
     const {post, avatar} = props
     return(
         <View style={{flexDirection:'row', marginBottom:10}}>
             <Avatar
-                source={avatar.source}
-                size={avatar.size}
-                rounded
+                uri={avatar.source.uri} 
+                size={40}
             />
             <View style={{marginLeft:10}}>
                 <Text style={{fontWeight:'bold', fontSize:16}}>

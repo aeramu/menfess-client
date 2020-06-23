@@ -1,12 +1,13 @@
 import React from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
-import {Avatar, Button, Image} from 'react-native-elements'
+import {Button, Image} from 'react-native-elements'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
 import {ProfileContext} from '../../Context'
 
 import PostCard from '../../Components/PostCard'
 import FloatButton from './Components/FloatButton'
+import Avatar from '../../Components/Avatar'
 
 const POST_LIST = gql`
   query($cursor: ID){
@@ -52,28 +53,28 @@ export default ({navigation}) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Avatar
-          source={{uri: profileAvatar}}
-          rounded
-          containerStyle={{marginRight:20}}
-          onPress={() => navigation.navigate('Profile')}     
-        />
-      ),
-      headerLeft: () => (
-        <View style={{flexDirection:'row'}}>
-          <Avatar
-            source={require('../../../assets/icon.png')}
-            containerStyle={{marginLeft:20, marginRight:10}}  
-            size={25}
-          />
-          <Image
-            source={require('../../../assets/menfess.png')}
-            style={{height:25, width:80}}
-            resizeMode='contain'
-          />
-        </View>
-      )
+      // headerRight: () => (
+      //   <Avatar
+      //     uri={profileAvatar}
+      //     size={30}
+      //     containerStyle={{marginRight:20}}
+      //     onPress={() => navigation.navigate('Profile')}     
+      //   />
+      // ),
+      // headerLeft: () => (
+      //   <View style={{flexDirection:'row'}}>
+      //     <Image
+      //       source={require('../../../assets/icon.png')}
+      //       style={{marginLeft:20, marginRight:10, height:25, width:25}}
+      //       resizeMode='contain'
+      //     />
+      //     <Image
+      //       source={require('../../../assets/menfess.png')}
+      //       style={{height:25, width:80}}
+      //       resizeMode='contain'
+      //     />
+      //   </View>
+      // )
     })
   })
 

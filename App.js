@@ -2,6 +2,7 @@ import React from 'react';
 import {AsyncStorage} from 'react-native'
 import {ApolloProvider} from '@apollo/react-hooks'
 import {AppLoading} from 'expo'
+import {Asset} from 'expo-asset'
 
 import {client} from './src/Config/Graphql';
 import {ProfileContext} from './src/Context'
@@ -36,6 +37,11 @@ export default function App() {
     const checkProfile = async () => {
       const name = await AsyncStorage.getItem('name')
       const avatar = await AsyncStorage.getItem('avatar')
+      await Asset.loadAsync([
+        require('./assets/splash.png'),
+        require('./assets/menfess.png'),
+        require('./assets/icon.png'),
+      ])
       setName(name)
       setAvatar(avatar)
       setIsLoading(false)

@@ -36,7 +36,7 @@ export default ({navigation, route}) => {
       headerRight: () => (
         <Button
           title='Post'
-          buttonStyle={{borderRadius:20, paddingHorizontal:20, marginRight:20, height:35}} 
+          buttonStyle={{borderRadius:20, paddingHorizontal:20, marginRight:20, height:35, backgroundColor:'#900e66'}} 
           onPress={handlePost}      
         />
       )
@@ -71,7 +71,6 @@ export default ({navigation, route}) => {
           rounded 
         />
         <Input
-          // containerStyle={{flex:1}}
           inputContainerStyle={{borderBottomWidth:0}}
           inputStyle={{fontSize:16}}
           autoFocus={true}
