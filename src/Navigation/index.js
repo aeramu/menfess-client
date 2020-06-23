@@ -33,14 +33,14 @@ const MainStackScreen = () => {
             />
           </View>
         ),
-        headerRight: () => (
-          <Avatar
-            uri={profileAvatar}
-            size={30}
-            containerStyle={{marginRight:20}}
-            onPress={() => navigation.navigate('Profile')}     
-          />
-        )
+        // headerRight: () => (
+        //   <Avatar
+        //     uri={profileAvatar}
+        //     size={30}
+        //     containerStyle={{marginRight:20}}
+        //     onPress={() => navigation.navigate('Profile')}     
+        //   />
+        // )
       }}/>
       <MainStack.Screen name='Post' component={PostScreen}/>
       <MainStack.Screen name='NewPost' component={NewPostScreen} options={{

@@ -1,8 +1,9 @@
 import React from 'react'
 import {ScrollView, View} from 'react-native'
-import {Button, Input, Avatar, Divider} from 'react-native-elements'
+import {Button, Input} from 'react-native-elements'
 import {RoundedPost} from '../../Components/PostCard'
 import {ProfileContext} from '../../Context'
+import Avatar from '../../Components/Avatar'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
@@ -67,8 +68,7 @@ export default ({navigation, route}) => {
       <View style={{flexDirection:'row', marginTop: 20}}>
         <Avatar
           size={40}
-          source={{uri: profileAvatar}}
-          rounded 
+          uri={profileAvatar}
         />
         <Input
           inputContainerStyle={{borderBottomWidth:0}}

@@ -53,28 +53,14 @@ export default ({navigation}) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      // headerRight: () => (
-      //   <Avatar
-      //     uri={profileAvatar}
-      //     size={30}
-      //     containerStyle={{marginRight:20}}
-      //     onPress={() => navigation.navigate('Profile')}     
-      //   />
-      // ),
-      // headerLeft: () => (
-      //   <View style={{flexDirection:'row'}}>
-      //     <Image
-      //       source={require('../../../assets/icon.png')}
-      //       style={{marginLeft:20, marginRight:10, height:25, width:25}}
-      //       resizeMode='contain'
-      //     />
-      //     <Image
-      //       source={require('../../../assets/menfess.png')}
-      //       style={{height:25, width:80}}
-      //       resizeMode='contain'
-      //     />
-      //   </View>
-      // )
+      headerRight: () => (
+        <Avatar
+          uri={profileAvatar}
+          size={30}
+          containerStyle={{marginRight:20}}
+          onPress={() => navigation.navigate('Profile')}     
+        />
+      )
     })
   })
 

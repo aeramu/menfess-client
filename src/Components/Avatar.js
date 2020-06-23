@@ -1,16 +1,20 @@
 import React from 'react'
 import {Image} from 'react-native-expo-image-cache'
-import { View } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 
 export default (props) => {
-    const {uri, size, onPress, containerStyle} = props
+    const {uri, size, onPress, containerStyle, showAccessory} = props
     return(
-        <View style={containerStyle}>
+        <TouchableOpacity 
+            style={containerStyle} 
+            onPress={() => onPress()}
+            activeOpacity={0.5}
+        >
             <Image
                 uri={uri}
                 style={{height:size,width:size,borderRadius:size}}
-                onPress={() => onPress()}
             />
-        </View>
+            {showAccessory? <></>:<></>}
+        </TouchableOpacity>
     )
 }

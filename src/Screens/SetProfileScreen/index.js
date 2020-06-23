@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, FlatList} from 'react-native'
-import {Button, Input, Avatar, Text, Overlay} from 'react-native-elements'
+import {Button, Input, Text, Overlay} from 'react-native-elements'
+import Avatar from '../../Components/Avatar'
 
 import {ProfileContext} from '../../Context'
 
@@ -24,13 +25,12 @@ export default ({navigation}) => {
   ]
 
   return (
-    <View style={{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:20}}>
+    <View style={{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:20, marginBottom:50}}>
       <Text style={{fontSize:25, fontWeight:'bold', marginBottom:40, color:'#900366'}}>
         Create Your Identity
       </Text>
       <Avatar
-        source={{uri: avatar}}
-        rounded
+        uri={avatar}
         size={70}
         showAccessory
         containerStyle={{marginBottom:20}}
@@ -39,6 +39,7 @@ export default ({navigation}) => {
       <Input
         placeholder='Name'
         value={name}
+        //autoFocus={true}
         inputContainerStyle={{borderWidth:1, borderRadius:20, paddingHorizontal:15, backgroundColor:'white'}}
         inputStyle={{fontSize:15}}
         autoCapitalize='words'
@@ -58,8 +59,7 @@ export default ({navigation}) => {
           data={list}
           renderItem={({item}) => 
             <Avatar
-              source={{uri: item}}
-              avatarStyle={{borderRadius:100}}
+              uri={item}
               containerStyle={{margin:10}}
               size={70}
               onPress={() => {
