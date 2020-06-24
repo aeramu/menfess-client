@@ -30,7 +30,7 @@ export default ({navigation}) => {
 
   return (
     <View style={{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:20, marginBottom:50}}>
-      <Text style={{fontSize:25, fontWeight:'bold', marginBottom:40, color:'#900366'}}>
+      <Text style={{fontSize:25, fontWeight:'bold', marginBottom:40, color:'#900e66'}}>
         Create Your Identity
       </Text>
       <Avatar

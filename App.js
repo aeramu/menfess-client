@@ -66,7 +66,7 @@ export default function App() {
         require('./assets/icon.png'),
       ])
       avatarList.map(async (uri) => {
-        await CacheManager.get(uri)
+        await CacheManager.get(uri).getPath()
       })
     }
     loadImage()
