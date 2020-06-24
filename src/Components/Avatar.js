@@ -1,6 +1,6 @@
 import React from 'react'
 import {Image} from 'react-native-expo-image-cache'
-import { TouchableOpacity } from 'react-native'
+import {TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default (props) => {

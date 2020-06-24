@@ -1,13 +1,10 @@
 import React from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
-import {Button, Image} from 'react-native-elements'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
 import {ProfileContext} from '../../Context'
-
-import PostCard from '../../Components/PostCard'
-import FloatButton from './Components/FloatButton'
-import Avatar from '../../Components/Avatar'
+import {PostCard, Avatar} from '../../Components'
+import {FloatButton} from './Components'
 
 const POST_LIST = gql`
   query($cursor: ID){
@@ -56,7 +53,7 @@ export default ({navigation}) => {
       headerRight: () => (
         <Avatar
           uri={profileAvatar}
-          size={40}
+          size={38}
           containerStyle={{marginRight:20}}
           onPress={() => navigation.navigate('Profile')}     
         />
@@ -85,14 +82,13 @@ export default ({navigation}) => {
         onRefresh={() => refetch()}
         onEndReached={() => morePost()}
         onEndReachedThreshold={0.5}
-        bounces={false}
         data={data.menfessPostList.edges}
         //ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
-        renderItem={({item}) => 
-          <PostCard post={item} onPress={handlePostClick}/>
-        }
+        renderItem={({item}) => (
+          <PostCard post={item} onPress={() => handlePostClick(item)}/>
+        )}
       />
-      <FloatButton onPress={handleNewPostClick}/>
+      <FloatButton onPress={() => handleNewPostClick()}/>
     </View>
   );
 }
