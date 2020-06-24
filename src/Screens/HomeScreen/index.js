@@ -87,7 +87,7 @@ export default ({navigation}) => {
         onEndReachedThreshold={0.5}
         bounces={false}
         data={data.menfessPostList.edges}
-        ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
+        //ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
         renderItem={({item}) => 
           <PostCard post={item} onPress={handlePostClick}/>
         }
