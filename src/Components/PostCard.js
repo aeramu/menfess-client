@@ -33,7 +33,7 @@ const Post = (props) => {
         <PostCardHeader 
             post={post}
             avatar={{
-                source:{uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/kaonashi.jpg'},
+                source:{uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'},
                 size:40,
             }}
         />

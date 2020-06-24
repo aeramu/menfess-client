@@ -25,7 +25,7 @@ export default ({navigation}) => {
   const {setProfile, profileName, profileAvatar} = React.useContext(ProfileContext)
 
   const [name, setName] = React.useState(profileName)
-  const [avatar, setAvatar] = React.useState(profileAvatar||'https://qiup-image.s3.amazonaws.com/avatar/kaonashi.jpg')
+  const [avatar, setAvatar] = React.useState(profileAvatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg')
   const [visible, setVisible] = React.useState(false)
 
   return (
@@ -35,7 +35,7 @@ export default ({navigation}) => {
       </Text>
       <Avatar
         uri={avatar}
-        size={70}
+        size={80}
         showAccessory
         containerStyle={{marginBottom:20}}
         onPress={() => setVisible(true)}
@@ -57,7 +57,7 @@ export default ({navigation}) => {
           navigation.navigate('Home')
         }}
       />
-      <Overlay overlayStyle={{height:400}} isVisible={visible} onBackdropPress={() => setVisible(false)}>
+      <Overlay overlayStyle={{height:350}} isVisible={visible} onBackdropPress={() => setVisible(false)}>
         <FlatList
           numColumns={3}
           data={avatarList}

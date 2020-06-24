@@ -58,6 +58,7 @@ export default function App() {
       "https://qiup-image.s3.amazonaws.com/avatar/ipin.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/einstein.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/batman.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg",
     ]    
     const loadImage = async() => {
       await Asset.loadAsync([
