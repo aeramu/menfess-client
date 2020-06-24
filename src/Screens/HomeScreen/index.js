@@ -11,7 +11,7 @@ import Avatar from '../../Components/Avatar'
 
 const POST_LIST = gql`
   query($cursor: ID){
-    justPostList(first: 20, after: $cursor){
+    menfessPostList(first: 20, after: $cursor){
       edges{
         id
         timestamp
@@ -30,21 +30,21 @@ export default ({navigation}) => {
   const {removeProfile, profileAvatar} = React.useContext(ProfileContext)
   const {loading, data, networkStatus, refetch, fetchMore} = useQuery(POST_LIST,{
     variables:{
-      cursor: "ffffffffffffffffffffffff"
+      cursor: null
     }
   })
 
   const morePost = () => {
     fetchMore({
       variables:{
-        cursor: data.justPostList.pageInfo.endCursor
+        cursor: data.menfessPostList.pageInfo.endCursor
       },
       updateQuery: (previousResult, {fetchMoreResult}) => {
         return {
-          justPostList:{
-            __typename: previousResult.justPostList.__typename,
-            edges: [...previousResult.justPostList.edges,...fetchMoreResult.justPostList.edges],
-            pageInfo: fetchMoreResult.justPostList.pageInfo
+          menfessPostList:{
+            __typename: previousResult.menfessPostList.__typename,
+            edges: [...previousResult.menfessPostList.edges,...fetchMoreResult.menfessPostList.edges],
+            pageInfo: fetchMoreResult.menfessPostList.pageInfo
           }
         }
       }
@@ -56,7 +56,7 @@ export default ({navigation}) => {
       headerRight: () => (
         <Avatar
           uri={profileAvatar}
-          size={30}
+          size={40}
           containerStyle={{marginRight:20}}
           onPress={() => navigation.navigate('Profile')}     
         />
@@ -86,7 +86,7 @@ export default ({navigation}) => {
         onEndReached={() => morePost()}
         onEndReachedThreshold={0.5}
         bounces={false}
-        data={data.justPostList.edges}
+        data={data.menfessPostList.edges}
         ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
         renderItem={({item}) => 
           <PostCard post={item} onPress={handlePostClick}/>

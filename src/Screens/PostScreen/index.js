@@ -9,7 +9,7 @@ import { Divider } from 'react-native-elements'
 
 POST_QUERY = gql`
   query($id: ID!){
-    justPost(id: $id){
+    menfessPost(id: $id){
       child{
         edges{
           id
@@ -47,7 +47,7 @@ export default ({navigation, route}) => {
         refreshing={networkStatus === 4}
         onRefresh={() => refetch()}
         // onEndReached={morePost()}
-        data={data.justPost.child.edges}
+        data={data.menfessPost.child.edges}
         ListHeaderComponent={() =>
           <> 
             <PostCard post={post} onPress={() => {}}/>

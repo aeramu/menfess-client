@@ -33,7 +33,7 @@ const Post = (props) => {
         <PostCardHeader 
             post={post}
             avatar={{
-                source:{uri:post.avatar||'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'},
+                source:{uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/kaonashi.jpg'},
                 size:40,
             }}
         />
@@ -63,9 +63,7 @@ const PostCardFooter = (props) => {
                 titleStyle={{color:'grey'}}
                 type='clear'
             /> */}
-            <View style={{flex:1}}/>
-            <View style={{flex:1}}/>
-            <View style={{flex:1}}/>
+            <View style={{flex:3}}/>
             <Button 
                 containerStyle={{flex:1}} 
                 icon={{name:'comment-o', type:'font-awesome', color:'grey', size:16}}

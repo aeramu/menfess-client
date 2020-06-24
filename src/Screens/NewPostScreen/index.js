@@ -11,7 +11,7 @@ import {gql} from 'apollo-boost'
 
 const POST_PARENT = gql`
   mutation ($name: String!, $body: String!, $avatar: String!, $parentID: ID){
-    postJustPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID){
+    postMenfessPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID){
       id
       body
     }
@@ -19,7 +19,7 @@ const POST_PARENT = gql`
 `
 const POST = gql`
   mutation ($name: String!, $avatar: String!, $body: String!){
-    postJustPost(name: $name, avatar: $avatar, body: $body){
+    postMenfessPost(name: $name, avatar: $avatar, body: $body){
       id
       body
     }

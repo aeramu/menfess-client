@@ -3,6 +3,7 @@ import {AsyncStorage} from 'react-native'
 import {ApolloProvider} from '@apollo/react-hooks'
 import {AppLoading} from 'expo'
 import {Asset} from 'expo-asset'
+import {CacheManager} from 'react-native-expo-image-cache'
 
 import {client} from './src/Config/Graphql';
 import {ProfileContext} from './src/Context'
@@ -22,6 +23,7 @@ export default function App() {
         setName(name)
         setAvatar(avatar)
       },
+      //remove profile for mock
       removeProfile: async () => {
         await AsyncStorage.removeItem('name')
         await AsyncStorage.removeItem('avatar')
@@ -37,17 +39,38 @@ export default function App() {
     const checkProfile = async () => {
       const name = await AsyncStorage.getItem('name')
       const avatar = await AsyncStorage.getItem('avatar')
-      await Asset.loadAsync([
-        require('./assets/splash.png'),
-        require('./assets/menfess.png'),
-        require('./assets/icon.png'),
-      ])
       setName(name)
       setAvatar(avatar)
       setIsLoading(false)
     }
     checkProfile()
   },[])
+
+  React.useEffect(() => {
+    const avatarList = [
+      "https://qiup-image.s3.amazonaws.com/avatar/upin.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/spiderman.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/saitama.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/ronald.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/mrbean.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/monalisa.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/kaonashi.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/ipin.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/einstein.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/batman.jpg",
+    ]    
+    const loadImage = async() => {
+      await Asset.loadAsync([
+        require('./assets/splash.png'),
+        require('./assets/menfess.png'),
+        require('./assets/icon.png'),
+      ])
+      avatarList.map(async (uri) => {
+        await CacheManager.get(uri)
+      })
+    }
+    loadImage()
+  })
 
   if (isLoading){
     return(

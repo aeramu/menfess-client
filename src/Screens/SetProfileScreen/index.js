@@ -3,26 +3,30 @@ import {View, FlatList} from 'react-native'
 import {Button, Input, Text, Overlay} from 'react-native-elements'
 import Avatar from '../../Components/Avatar'
 
+import {gql} from 'apollo-boost'
+import {useQuery} from '@apollo/react-hooks'
+
 import {ProfileContext} from '../../Context'
 
+const AVATAR_LIST = gql`
+  query{
+    menfessAvatarList
+  }
+`
 export default ({navigation}) => {
+  const [avatarList, setAvatarList] = React.useState([])
+
+  useQuery(AVATAR_LIST,{
+    onCompleted(data){
+      setAvatarList(data.menfessAvatarList)
+    }
+  })
+  
   const {setProfile, profileName, profileAvatar} = React.useContext(ProfileContext)
 
   const [name, setName] = React.useState(profileName)
-  const [avatar, setAvatar] = React.useState(profileAvatar||'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg')
+  const [avatar, setAvatar] = React.useState(profileAvatar||'https://qiup-image.s3.amazonaws.com/avatar/kaonashi.jpg')
   const [visible, setVisible] = React.useState(false)
-
-  const list = [
-    'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    'https://qiup-image.s3.amazonaws.com/avatar/bart.jpg',
-    'https://qiup-image.s3.amazonaws.com/avatar/buttercup.png',
-    'https://qiup-image.s3.amazonaws.com/avatar/homer.jpg',
-    'https://qiup-image.s3.amazonaws.com/avatar/jerry.jpeg',
-    'https://qiup-image.s3.amazonaws.com/avatar/phantom.jpg',
-    'https://qiup-image.s3.amazonaws.com/avatar/pig.jpg',
-    'https://qiup-image.s3.amazonaws.com/avatar/powerpuff.jpg',
-  ]
 
   return (
     <View style={{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:20, marginBottom:50}}>
@@ -56,7 +60,8 @@ export default ({navigation}) => {
       <Overlay overlayStyle={{height:400}} isVisible={visible} onBackdropPress={() => setVisible(false)}>
         <FlatList
           numColumns={3}
-          data={list}
+          data={avatarList}
+          keyExtractor={(index) => index}
           renderItem={({item}) => 
             <Avatar
               uri={item}
