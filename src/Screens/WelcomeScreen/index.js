@@ -23,7 +23,6 @@ export default ({navigation}) => {
             id += (Math.floor(Math.random() * 16)).toString(16);
           }
           setID(id)
-          console.log(id)
           navigation.navigate('Profile')
         }}
       />

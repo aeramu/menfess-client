@@ -5,6 +5,30 @@ import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
 import Avatar from './Avatar'
 
+import {useMutation} from '@apollo/react-hooks'
+import {gql} from 'apollo-boost';
+import {ProfileContext} from '../Context'
+
+const UPVOTE_POST = gql`
+  mutation($accountID: ID!, $postID: ID!){
+    upvoteMenfessPost(accountID: $accountID, postID: $postID){
+        id
+        replyCount
+        upvoteCount
+        downvoteCount
+    }
+  }
+`
+const DOWNVOTE_POST = gql`
+  mutation($accountID: ID!, $postID: ID!){
+    downvoteMenfessPost(accountID: $accountID, postID: $postID){
+        id
+        replyCount
+        upvoteCount
+        downvoteCount
+    }
+  }
+`
 const PostCardHeader = ({name, avatar, timestamp}) => {
     return(
         <View style={{flexDirection:'row', marginBottom:10}}>
@@ -27,21 +51,41 @@ const PostCardHeader = ({name, avatar, timestamp}) => {
 const PostCardFooter = (props) => {
     const {post} = props
     const navigation = useNavigation()
+    const [upvote] = useMutation(UPVOTE_POST)
+    const [downvote] = useMutation(DOWNVOTE_POST)
+    const {profileID} = React.useContext(ProfileContext)
+
     return (
         <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
             <Button 
                 containerStyle={{flex:1}}
-                icon={{name:'arrow-up', type:'font-awesome', color:'grey', size:16}}
-                title='0'
+                icon={{name:'arrow-up', type:'font-awesome', color: post.upvoted? 'red':'grey', size:16}}
+                title={post.upvoteCount.toString()}
                 titleStyle={{color:'grey'}}
                 type='clear'
+                onPress={() => {
+                    upvote({
+                        variables:{
+                            postID: post.id,
+                            accountID: profileID,
+                        }
+                    })
+                }}
             />
             <Button 
                 containerStyle={{flex:1}} 
-                icon={{name:'arrow-down', type:'font-awesome', color:'grey', size:16}}
-                title='0'
+                icon={{name:'arrow-down', type:'font-awesome', color: post.upvoted? 'red':'grey', size:16}}
+                title={post.downvoteCount.toString()}
                 titleStyle={{color:'grey'}}
                 type='clear'
+                onPress={() => {
+                    downvote({
+                        variables:{
+                            postID: post.id,
+                            accountID: profileID,
+                        }
+                    })
+                }}
             />
             <Button 
                 containerStyle={{flex:1}} 

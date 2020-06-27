@@ -16,6 +16,8 @@ const POST_LIST = gql`
         avatar
         body
         replyCount
+        upvoteCount
+        downvoteCount
       }
       pageInfo{
         endCursor
