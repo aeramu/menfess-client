@@ -10,8 +10,8 @@ import {gql} from 'apollo-boost';
 import {ProfileContext} from '../Context'
 
 const UPVOTE_POST = gql`
-  mutation($accountID: ID!, $postID: ID!){
-    upvoteMenfessPost(accountID: $accountID, postID: $postID){
+  mutation($postID: ID!){
+    upvoteMenfessPost(postID: $postID){
         id
         replyCount
         upvoteCount
@@ -20,8 +20,8 @@ const UPVOTE_POST = gql`
   }
 `
 const DOWNVOTE_POST = gql`
-  mutation($accountID: ID!, $postID: ID!){
-    downvoteMenfessPost(accountID: $accountID, postID: $postID){
+  mutation($postID: ID!){
+    downvoteMenfessPost(postID: $postID){
         id
         replyCount
         upvoteCount
@@ -67,7 +67,6 @@ const PostCardFooter = (props) => {
                     upvote({
                         variables:{
                             postID: post.id,
-                            accountID: profileID,
                         }
                     })
                 }}
@@ -82,7 +81,6 @@ const PostCardFooter = (props) => {
                     downvote({
                         variables:{
                             postID: post.id,
-                            accountID: profileID,
                         }
                     })
                 }}
