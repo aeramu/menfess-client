@@ -12,6 +12,7 @@ import Navigator from './src/Navigation'
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
+  const [id, setId] = React.useState()
   const [name, setName] = React.useState()
   const [avatar, setAvatar] = React.useState()
 
@@ -23,13 +24,20 @@ export default function App() {
         setName(name)
         setAvatar(avatar)
       },
+      setID: async (id) => {
+        await AsyncStorage.setItem('id', id)
+        setId(id)
+      },
       //remove profile for mock
       removeProfile: async () => {
+        await AsyncStorage.removeItem('id')
         await AsyncStorage.removeItem('name')
         await AsyncStorage.removeItem('avatar')
+        setId(null)
         setName(null)
         setAvatar(null)
       },
+      profileID: id,
       profileName: name,
       profileAvatar: avatar,
     })
@@ -37,8 +45,10 @@ export default function App() {
 
   React.useEffect(() => {
     const checkProfile = async () => {
+      const id = await AsyncStorage.getItem('id')
       const name = await AsyncStorage.getItem('name')
       const avatar = await AsyncStorage.getItem('avatar')
+      setId(id)
       setName(name)
       setAvatar(avatar)
       setIsLoading(false)
@@ -82,7 +92,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <ProfileContext.Provider value = {ProfileMemo}>
-        <Navigator profile={name}/>
+        <Navigator profile={id && name && avatar}/>
       </ProfileContext.Provider>  
     </ApolloProvider>
   );
