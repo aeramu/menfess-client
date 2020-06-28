@@ -18,6 +18,10 @@ POST_QUERY = gql`
           avatar
           body
           replyCount
+          upvoteCount
+          downvoteCount
+          upvoted
+          downvoted
         }
       }
     }

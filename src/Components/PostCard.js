@@ -7,7 +7,6 @@ import Avatar from './Avatar'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
-import {ProfileContext} from '../Context'
 
 const UPVOTE_POST = gql`
   mutation($postID: ID!){
@@ -16,6 +15,8 @@ const UPVOTE_POST = gql`
         replyCount
         upvoteCount
         downvoteCount
+        upvoted
+        downvoted
     }
   }
 `
@@ -26,6 +27,8 @@ const DOWNVOTE_POST = gql`
         replyCount
         upvoteCount
         downvoteCount
+        upvoted
+        downvoted
     }
   }
 `
@@ -35,6 +38,7 @@ const PostCardHeader = ({name, avatar, timestamp}) => {
             <Avatar
                 uri={avatar.source.uri} 
                 size={40}
+                onPress={() => {}}
             />
             <View style={{marginLeft:10}}>
                 <Text style={{fontWeight:'bold', fontSize:16}}>
@@ -53,7 +57,6 @@ const PostCardFooter = (props) => {
     const navigation = useNavigation()
     const [upvote] = useMutation(UPVOTE_POST)
     const [downvote] = useMutation(DOWNVOTE_POST)
-    const {profileID} = React.useContext(ProfileContext)
 
     return (
         <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
@@ -73,7 +76,7 @@ const PostCardFooter = (props) => {
             />
             <Button 
                 containerStyle={{flex:1}} 
-                icon={{name:'arrow-down', type:'font-awesome', color: post.upvoted? 'red':'grey', size:16}}
+                icon={{name:'arrow-down', type:'font-awesome', color: post.downvoted? 'red':'grey', size:16}}
                 title={post.downvoteCount.toString()}
                 titleStyle={{color:'grey'}}
                 type='clear'

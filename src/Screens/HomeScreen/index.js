@@ -18,6 +18,8 @@ const POST_LIST = gql`
         replyCount
         upvoteCount
         downvoteCount
+        upvoted
+        downvoted
       }
       pageInfo{
         endCursor

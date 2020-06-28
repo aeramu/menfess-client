@@ -29,6 +29,7 @@ const POST = gql`
 export default ({navigation, route}) => {
   const {profileName, profileAvatar} = React.useContext(ProfileContext)
   const [body, setBody] = React.useState('')
+  const [disabled, setDisabled] = React.useState(true)
 
   const [postMutation] = route.params? useMutation(POST_PARENT) : useMutation(POST)
 
@@ -38,6 +39,7 @@ export default ({navigation, route}) => {
         <Button
           title='Post'
           buttonStyle={{borderRadius:20, paddingHorizontal:20, marginRight:20, height:35, backgroundColor:'#900e66'}} 
+          disabled={disabled}
           onPress={handlePost}      
         />
       )
@@ -76,7 +78,10 @@ export default ({navigation, route}) => {
           autoFocus={true}
           multiline={true}
           placeholder='Write your post'
-          onChangeText={(text) => setBody(text)}
+          onChangeText={(text) => {
+            setDisabled(text.length == 0? true : false)
+            setBody(text)
+          }}
         />
       </View>
     </ScrollView>
