@@ -7,9 +7,15 @@ import {useQuery} from '@apollo/react-hooks'
 import PostCard from '../../Components/PostCard'
 import { Divider } from 'react-native-elements'
 
-POST_QUERY = gql`
+const POST_QUERY = gql`
   query($id: ID!){
     menfessPost(id: $id){
+      id
+      replyCount
+      upvoteCount
+      downvoteCount
+      upvoted
+      downvoted
       child{
         edges{
           id
@@ -54,7 +60,7 @@ export default ({navigation, route}) => {
         data={data.menfessPost.child.edges}
         ListHeaderComponent={() =>
           <> 
-            <PostCard post={post} onPress={() => {}}/>
+            <PostCard post={post} repost onPress={() => {}}/>
             <Divider style={{backgroundColor:'light-grey', height:20}}/>
           </>
         }

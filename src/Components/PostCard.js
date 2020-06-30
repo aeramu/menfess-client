@@ -4,6 +4,7 @@ import {Button, Divider, Text} from 'react-native-elements'
 import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
 import Avatar from './Avatar'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
@@ -12,7 +13,6 @@ const UPVOTE_POST = gql`
   mutation($postID: ID!){
     upvoteMenfessPost(postID: $postID){
         id
-        replyCount
         upvoteCount
         downvoteCount
         upvoted
@@ -24,7 +24,6 @@ const DOWNVOTE_POST = gql`
   mutation($postID: ID!){
     downvoteMenfessPost(postID: $postID){
         id
-        replyCount
         upvoteCount
         downvoteCount
         upvoted
@@ -62,7 +61,12 @@ const PostCardFooter = (props) => {
         <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
             <Button 
                 containerStyle={{flex:1}}
-                icon={{name:'arrow-up', type:'font-awesome', color: post.upvoted? 'red':'grey', size:16}}
+                icon={
+                    post.upvoted?
+                    <AntDesign name='smile-circle' color='grey' size={18} style={{marginRight:5, marginTop:3}}/>
+                    :
+                    <AntDesign name='smileo' color='grey' size={18} style={{marginRight:5, marginTop:3}}/>
+                }
                 title={post.upvoteCount.toString()}
                 titleStyle={{color:'grey'}}
                 type='clear'
@@ -70,13 +74,29 @@ const PostCardFooter = (props) => {
                     upvote({
                         variables:{
                             postID: post.id,
+                        },
+                        optimisticResponse:{
+                            __typname: "Mutation",
+                            upvoteMenfessPost:{
+                                __typename: "MenfessPost",
+                                id: post.id,
+                                upvoted: !post.upvoted,
+                                upvoteCount: post.upvoteCount + (post.upvoted? -1 : 1),
+                                downvoted: false,
+                                downvoteCount: post.downvoteCount + (post.downvoted? -1 : 0),
+                            },
                         }
                     })
                 }}
             />
             <Button 
                 containerStyle={{flex:1}} 
-                icon={{name:'arrow-down', type:'font-awesome', color: post.downvoted? 'red':'grey', size:16}}
+                icon={
+                    post.downvoted?
+                    <AntDesign name='frown' color='grey' size={18} style={{marginRight:5, marginTop:3}}/>
+                    :
+                    <AntDesign name='frowno' color='grey' size={18} style={{marginRight:5, marginTop:3}}/>
+                }
                 title={post.downvoteCount.toString()}
                 titleStyle={{color:'grey'}}
                 type='clear'
@@ -84,6 +104,17 @@ const PostCardFooter = (props) => {
                     downvote({
                         variables:{
                             postID: post.id,
+                        },
+                        optimisticResponse:{
+                            __typname: "Mutation",
+                            downvoteMenfessPost:{
+                                __typename: "MenfessPost",
+                                id: post.id,
+                                downvoted: !post.downvoted,
+                                downvoteCount: post.downvoteCount + (post.downvoted? -1 : 1),
+                                upvoted: false,
+                                upvoteCount: post.upvoteCount + (post.upvoted? -1 : 0),
+                            },
                         }
                     })
                 }}
@@ -98,10 +129,11 @@ const PostCardFooter = (props) => {
             />
             <Button 
                 containerStyle={{flex:1}} 
-                icon={{name:'share-2', type:'feather', color:'grey', size:16}}
+                icon={{name:'twitter-retweet', type:'material-community', color:'grey', size:22}}
                 titleStyle={{color:'grey'}}
                 title=' '
                 type='clear'
+                onPress={() => navigation.navigate('NewPost',{post, repost:true})}
             />
         </View>
     )
@@ -138,7 +170,7 @@ export const RoundedPost = (props) => {
                 overflow:'hidden'
             }}
             activeOpacity={0.5} 
-            onPress={() => onPress(post)}
+            onPress={() => onPress? onPress(post):{}}
         >
             <Post post={post}/>
         </TouchableOpacity>
@@ -146,7 +178,7 @@ export const RoundedPost = (props) => {
 }
 
 export default (props) => {
-    const {post, onPress, parent} = props
+    const {post, onPress, repost} = props
     return(
         <TouchableOpacity 
             style={{backgroundColor:'white'}} 
@@ -154,7 +186,11 @@ export default (props) => {
             onPress={() => onPress(post)}
         >
             <Post post={post}/>
-            {parent && post.parent && <RoundedPost post={post.parent} onPress={onPress}/>}
+            {repost && post.repost && 
+                <View style={{marginHorizontal:15, marginTop:5}}>
+                <RoundedPost post={post.repost} onPress={onPress}/>
+                </View>    
+            }
             <PostCardFooter post={post}/>
             <Divider/>
         </TouchableOpacity>

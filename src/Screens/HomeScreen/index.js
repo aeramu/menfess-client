@@ -20,6 +20,13 @@ const POST_LIST = gql`
         downvoteCount
         upvoted
         downvoted
+        repost{
+          id
+          timestamp
+          name
+          avatar
+          body
+        }
       }
       pageInfo{
         endCursor
@@ -89,7 +96,7 @@ export default ({navigation}) => {
         data={data.menfessPostList.edges}
         //ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
         renderItem={({item}) => (
-          <PostCard post={item} onPress={() => handlePostClick(item)}/>
+          <PostCard post={item} onPress={() => handlePostClick(item)} repost/>
         )}
       />
       <FloatButton onPress={() => handleNewPostClick()}/>

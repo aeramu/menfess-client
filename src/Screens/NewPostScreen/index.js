@@ -9,19 +9,20 @@ import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 
 
-const POST_PARENT = gql`
-  mutation ($name: String!, $body: String!, $avatar: String!, $parentID: ID){
-    postMenfessPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID){
-      id
-      body
-    }
-  }
-`
 const POST = gql`
-  mutation ($name: String!, $avatar: String!, $body: String!){
-    postMenfessPost(name: $name, avatar: $avatar, body: $body){
+  mutation ($name: String!, $body: String!, $avatar: String!, $parentID: ID, $repostID: ID){
+    postMenfessPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID, repostID: $repostID){
       id
-      body
+      parent{
+        replyCount
+        upvoteCount
+        downvoteCount
+      }
+      repost{
+        replyCount
+        upvoteCount
+        downvoteCount
+      }
     }
   }
 `
@@ -31,7 +32,7 @@ export default ({navigation, route}) => {
   const [body, setBody] = React.useState('')
   const [disabled, setDisabled] = React.useState(true)
 
-  const [postMutation] = route.params? useMutation(POST_PARENT) : useMutation(POST)
+  const [postMutation] = useMutation(POST)
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -52,7 +53,8 @@ export default ({navigation, route}) => {
         name: profileName,
         avatar: profileAvatar,
         body,
-        parentID: route.params? route.params.post.id : null 
+        parentID: route.params && !route.params.repost ? route.params.post.id : null,
+        repostID: route.params && route.params.repost ? route.params.post.id : null,
       }
     })
     .then(() => {
@@ -62,17 +64,14 @@ export default ({navigation, route}) => {
 
   return (
     <ScrollView style={{flex:1, backgroundColor:'white', paddingHorizontal:15, paddingTop:20}}>
-      {route.params ? (
-        <>
-          <RoundedPost post={route.params.post}/>
-        </>
-      ):(<></>)}
+      {route.params && !route.params.repost && <RoundedPost post={route.params.post}/>}
       <View style={{flexDirection:'row', marginTop: 20}}>
         <Avatar
           size={40}
           uri={profileAvatar}
         />
         <Input
+        containerStyle={{flex:1}}
           inputContainerStyle={{borderBottomWidth:0}}
           inputStyle={{fontSize:16}}
           autoFocus={true}
@@ -84,6 +83,7 @@ export default ({navigation, route}) => {
           }}
         />
       </View>
+      {route.params && route.params.repost && <RoundedPost post={route.params.post}/>}
     </ScrollView>
   );
 }
