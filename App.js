@@ -59,16 +59,16 @@ export default function App() {
   React.useEffect(() => {
     const avatarList = [
       "https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg",
-      "https://qiup-image.s3.amazonaws.com/avatar/upin.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/batman.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/spiderman.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/saitama.jpg",
-      "https://qiup-image.s3.amazonaws.com/avatar/ronald.jpg",
-      "https://qiup-image.s3.amazonaws.com/avatar/mrbean.jpg",
-      "https://qiup-image.s3.amazonaws.com/avatar/monalisa.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/kaonashi.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/mrbean.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/upin.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/ipin.jpg",
       "https://qiup-image.s3.amazonaws.com/avatar/einstein.jpg",
-      "https://qiup-image.s3.amazonaws.com/avatar/batman.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/monalisa.jpg",
+      "https://qiup-image.s3.amazonaws.com/avatar/ronald.jpg",
     ]    
     const loadImage = async() => {
       await Asset.loadAsync([
@@ -76,11 +76,9 @@ export default function App() {
         require('./assets/menfess.png'),
         require('./assets/icon.png'),
       ])
-      const avatarPromises = avatarList.map(async (uri) => {
-        const promise = await CacheManager.get(uri).getPath()
-        return promise
-      })
-      await Promise.all(avatarPromises)
+      for (let i = 0; i < avatarList.length; i++){
+        await CacheManager.get(avatarList[i]).getPath()
+      }
     }
     loadImage()
   },[])

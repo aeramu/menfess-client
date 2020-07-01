@@ -1,9 +1,8 @@
 import React from 'react'
 import {ScrollView, View} from 'react-native'
 import {Button, Input} from 'react-native-elements'
-import {RoundedPost} from '../../Components/PostCard'
 import {ProfileContext} from '../../Context'
-import {Avatar} from '../../Components'
+import {Avatar, RoundedPost} from '../../Components'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'

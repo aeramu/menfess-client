@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, FlatList} from 'react-native'
 import {Button, Input, Text, Overlay} from 'react-native-elements'
-import Avatar from '../../Components/Avatar'
+import {Avatar} from '../../Components'
 
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'

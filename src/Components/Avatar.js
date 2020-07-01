@@ -1,9 +1,10 @@
 import React from 'react'
 import {Image} from 'react-native-expo-image-cache'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity, View, Text} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import moment from 'moment'
 
-export default (props) => {
+export const Avatar = (props) => {
     const {uri, size, onPress, containerStyle, showAccessory} = props
     return(
         <TouchableOpacity 
@@ -24,5 +25,25 @@ export default (props) => {
                 />
             }
         </TouchableOpacity>
+    )
+}
+
+export const AvatarCard = ({name, avatar, timestamp}) => {
+    return(
+        <View style={{flexDirection:'row', marginBottom:10}}>
+            <Avatar
+                uri={avatar.source.uri} 
+                size={40}
+                onPress={() => {}}
+            />
+            <View style={{marginLeft:10}}>
+                <Text style={{fontWeight:'bold', fontSize:16}}>
+                    {name}
+                </Text>
+                <Text style={{color:'grey', fontSize:12}}>
+                    {moment.unix(timestamp).fromNow()}
+                </Text>
+            </View>
+        </View>
     )
 }

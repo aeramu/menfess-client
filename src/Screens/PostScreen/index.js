@@ -4,7 +4,7 @@ import { View, ActivityIndicator, FlatList } from 'react-native'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
-import PostCard from '../../Components/PostCard'
+import {PostCard} from '../../Components'
 import { Divider } from 'react-native-elements'
 
 const POST_QUERY = gql`

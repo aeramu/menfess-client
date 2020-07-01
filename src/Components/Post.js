@@ -1,9 +1,8 @@
 import React from 'react'
 import {TouchableOpacity, View} from 'react-native'
 import {Button, Divider, Text} from 'react-native-elements'
-import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
-import Avatar from './Avatar'
+import {AvatarCard} from './Avatar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import {useMutation} from '@apollo/react-hooks'
@@ -31,25 +30,6 @@ const DOWNVOTE_POST = gql`
     }
   }
 `
-const PostCardHeader = ({name, avatar, timestamp}) => {
-    return(
-        <View style={{flexDirection:'row', marginBottom:10}}>
-            <Avatar
-                uri={avatar.source.uri} 
-                size={40}
-                onPress={() => {}}
-            />
-            <View style={{marginLeft:10}}>
-                <Text style={{fontWeight:'bold', fontSize:16}}>
-                    {name}
-                </Text>
-                <Text style={{color:'grey', fontSize:12}}>
-                    {moment.unix(timestamp).fromNow()}
-                </Text>
-            </View>
-        </View>
-    )
-}
 
 const PostCardFooter = (props) => {
     const {post} = props
@@ -143,7 +123,7 @@ const Post = (props) => {
     const {post} = props
     return(
       <View style={{paddingLeft:15, paddingTop:15}}>
-        <PostCardHeader 
+        <AvatarCard
             name={post.name}
             avatar={{
                 source:{uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'},
@@ -177,7 +157,7 @@ export const RoundedPost = (props) => {
     )
 }
 
-export default (props) => {
+export const PostCard = (props) => {
     const {post, onPress, repost} = props
     return(
         <TouchableOpacity 
