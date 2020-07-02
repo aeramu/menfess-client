@@ -29,8 +29,8 @@ export default ({navigation}) => {
   const [visible, setVisible] = React.useState(false)
 
   return (
-    <View style={{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:20, marginBottom:50}}>
-      <Text style={{fontSize:25, fontWeight:'bold', marginBottom:40, color:'#900e66'}}>
+    <View style={styles.container}>
+      <Text style={styles.text}>
         Create Your Identity
       </Text>
       <Avatar
@@ -43,21 +43,24 @@ export default ({navigation}) => {
       <Input
         placeholder='Name'
         value={name}
-        //autoFocus={true}
-        inputContainerStyle={{borderWidth:1, borderRadius:20, paddingHorizontal:15, backgroundColor:'white'}}
+        inputContainerStyle={styles.input}
         inputStyle={{fontSize:15}}
         autoCapitalize='words'
         onChangeText={(text) => setName(text)}
       />
       <Button
         title='Save'
-        buttonStyle={{paddingHorizontal:30, borderRadius: 20, backgroundColor:'#900e66', alignSelf:'flex-end'}}
+        buttonStyle={styles.button}
         onPress={() => {
           setProfile(name, avatar)
           navigation.navigate('Home')
         }}
       />
-      <Overlay overlayStyle={{height:350}} isVisible={visible} onBackdropPress={() => setVisible(false)}>
+      <Overlay 
+        overlayStyle={{height:350}}
+        isVisible={visible}
+        onBackdropPress={() => setVisible(false)}
+      >
         <FlatList
           numColumns={3}
           data={avatarList}
@@ -78,3 +81,31 @@ export default ({navigation}) => {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1, 
+    justifyContent:'center', 
+    alignItems:'center', 
+    paddingHorizontal:20, 
+    marginBottom:50
+  },
+  text:{
+    fontSize:25, 
+    fontWeight:'bold', 
+    marginBottom:40, 
+    color:'#900e66'
+  },
+  input:{
+    borderWidth:1, 
+    borderRadius:20, 
+    paddingHorizontal:15, 
+    backgroundColor:'white'
+  },
+  button:{
+    paddingHorizontal:30, 
+    borderRadius: 20, 
+    backgroundColor:'#900e66', 
+    alignSelf:'flex-end'
+  }
+})

@@ -4,6 +4,7 @@ import {Button, Divider, Text} from 'react-native-elements'
 import {useNavigation} from '@react-navigation/native'
 import {AvatarCard} from './Avatar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import moment from 'moment'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
@@ -124,12 +125,12 @@ const Post = (props) => {
     return(
       <View style={{paddingLeft:15, paddingTop:15}}>
         <AvatarCard
-            name={post.name}
             avatar={{
                 uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg',
                 size:40,
             }}
-            timestamp={post.timestamp}
+            title={post.name}
+            subtitle={moment.unix(post.timestamp).fromNow()}
             style={{marginBottom:8}}
         />
         <Text style={{fontSize:16}} >
@@ -169,7 +170,7 @@ export const PostCard = (props) => {
             <Post post={post}/>
             {repost && post.repost && 
                 <View style={{marginHorizontal:15, marginTop:5}}>
-                <RoundedPost post={post.repost} onPress={onPress}/>
+                    <RoundedPost post={post.repost} onPress={onPress}/>
                 </View>    
             }
             <PostCardFooter post={post}/>

@@ -16,7 +16,8 @@ export const RoomCard = ({name, onPress, uri}) => {
             onPress={() => onPress? onPress() : {}}
         >
             <AvatarCard 
-                name={name}
+                title={name}
+                subtitle='deskripsi menfess'
                 avatar={{uri: uri || 'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'}}
                 style={styles.avatarCard}
             />
