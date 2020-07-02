@@ -1,15 +1,53 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {NavigationContainer} from '@react-navigation/native'
 import {View, Image} from 'react-native'
-import Avatar from '../Components/Avatar'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Avatar} from '../Components'
 import {ProfileContext} from '../Context'
 
-import HomeScreen from '../Screens/HomeScreen'
-import PostScreen from '../Screens/PostScreen'
-import NewPostScreen from '../Screens/NewPostScreen'
-import SetProfileScreen from '../Screens/SetProfileScreen'
-import WelcomeScreen from '../Screens/WelcomeScreen'
+import {
+  HomeScreen,
+  PostScreen,
+  NewPostScreen,
+  SetProfileScreen,
+  WelcomeScreen,
+  RoomListScreen,
+} from '../Screens'
+
+const MainTabs = createBottomTabNavigator()
+const MainTabsScreen = () => {
+  return(
+    <MainTabs.Navigator
+      initialRouteName='Home'
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'ios-information-circle'
+              : 'ios-information-circle-outline';
+          } else if (route.name === 'Room') {
+            iconName = focused 
+              ? 'ios-list-box' 
+              : 'ios-list';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#900e66',
+        inactiveTintColor: 'gray',
+      }}
+      backBehavior='initialRoute'
+    >
+      <MainTabs.Screen name='Room' component={RoomListScreen}/>
+      <MainTabs.Screen name='Home' component={HomeScreen}/>
+      <MainTabs.Screen name='Notification' component={SetProfileScreen}/>
+    </MainTabs.Navigator>
+  )
+}
 
 const MainStack = createStackNavigator()
 
@@ -17,8 +55,11 @@ const MainStackScreen = () => {
   const {profileAvatar} = React.useContext(ProfileContext)
   return(
     <MainStack.Navigator>
-      <MainStack.Screen name='Home' component={HomeScreen} options={{
-        title: '',
+      <MainStack.Screen 
+        name='Tabs' 
+        component={MainTabsScreen} 
+        options={({navigation}) => ({
+        title:'',
         headerLeft: () => (
           <View style={{flexDirection:'row'}}>
             <Image
@@ -33,15 +74,15 @@ const MainStackScreen = () => {
             />
           </View>
         ),
-        // headerRight: () => (
-        //   <Avatar
-        //     uri={profileAvatar}
-        //     size={30}
-        //     containerStyle={{marginRight:20}}
-        //     onPress={() => navigation.navigate('Profile')}     
-        //   />
-        // )
-      }}/>
+        headerRight: () => (
+          <Avatar
+            uri={profileAvatar}
+            size={38}
+            containerStyle={{marginRight:20}}
+            onPress={() => navigation.navigate('Profile')}     
+          />
+        )
+      })}/>
       <MainStack.Screen name='Post' component={PostScreen}/>
       <MainStack.Screen name='NewPost' component={NewPostScreen} options={{
         title: ''
