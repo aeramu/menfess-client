@@ -7,7 +7,7 @@ import {
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
-import {AvatarCard} from '../../Components'
+import {RoomCard} from './Components'
 
 const ROOM_LIST = gql `
     query{
@@ -20,28 +20,26 @@ const ROOM_LIST = gql `
     }
 `
 
-export default () => {
+export default ({navigation}) => {
     const {loading, data} = useQuery(ROOM_LIST)
     if (loading) return (
         <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
           <ActivityIndicator size={50}/>
         </View>
-      )
+    )
+
+    const handleRoomClick = (id) => {
+        navigation.navigate('Room',{id})
+    }
+
     return(
         <View style={{flex:1}}>
         <FlatList
-            // refreshing={networkStatus === 4}
-            // onRefresh={() => refetch()}
-            // onEndReached={() => morePost()}
-            // onEndReachedThreshold={0.5}
             data={data.menfessRoomList.edges}
             renderItem={({item}) => (
-            <AvatarCard 
-                name={item.name} 
-                avatar={{source:{uri:'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'}}}/>
+                <RoomCard name={item.name} onPress={() => handleRoomClick(item.id)}/>
             )}
         />
-        {/* <FloatButton onPress={() => handleNewPostClick()}/> */}
         </View>
     )
 }

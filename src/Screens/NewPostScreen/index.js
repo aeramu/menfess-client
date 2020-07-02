@@ -9,8 +9,8 @@ import {gql} from 'apollo-boost'
 
 
 const POST = gql`
-  mutation ($name: String!, $body: String!, $avatar: String!, $parentID: ID, $repostID: ID){
-    postMenfessPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID, repostID: $repostID){
+  mutation ($name: String!, $body: String!, $avatar: String!, $parentID: ID, $repostID: ID, $roomID: ID){
+    postMenfessPost(name: $name, body: $body, avatar: $avatar, parentID: $parentID, repostID: $repostID, roomID: $roomID){
       id
       parent{
         replyCount
@@ -52,8 +52,9 @@ export default ({navigation, route}) => {
         name: profileName,
         avatar: profileAvatar,
         body,
-        parentID: route.params && !route.params.repost ? route.params.post.id : null,
-        repostID: route.params && route.params.repost ? route.params.post.id : null,
+        parentID: route.params && route.params.post && !route.params.repost ? route.params.post.id : null,
+        repostID: route.params && route.params.post && route.params.repost ? route.params.post.id : null,
+        roomID: route.params && route.params.roomID ? route.params.roomID : null,
       }
     })
     .then(() => {
@@ -63,7 +64,7 @@ export default ({navigation, route}) => {
 
   return (
     <ScrollView style={{flex:1, backgroundColor:'white', paddingHorizontal:15, paddingTop:20}}>
-      {route.params && !route.params.repost && <RoundedPost post={route.params.post}/>}
+      {route.params && route.params.post && !route.params.repost && <RoundedPost post={route.params.post}/>}
       <View style={{flexDirection:'row', marginTop: 20}}>
         <Avatar
           size={40}
@@ -82,7 +83,7 @@ export default ({navigation, route}) => {
           }}
         />
       </View>
-      {route.params && route.params.repost && <RoundedPost post={route.params.post}/>}
+      {route.params && route.params.post && route.params.repost && <RoundedPost post={route.params.post}/>}
     </ScrollView>
   );
 }

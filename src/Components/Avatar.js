@@ -1,6 +1,6 @@
 import React from 'react'
 import {Image} from 'react-native-expo-image-cache'
-import {TouchableOpacity, View, Text} from 'react-native'
+import {TouchableOpacity, View, Text, StyleSheet} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import moment from 'moment'
 
@@ -14,12 +14,12 @@ export const Avatar = (props) => {
         >
             <Image
                 uri={uri}
-                style={{height:size,width:size,borderRadius:size}}
+                style={{height:size, width:size, borderRadius:size}}
             />
             {showAccessory && 
                 <Icon
                     name='mode-edit' 
-                    style={{position:'absolute', padding:2,bottom:0, right:0, backgroundColor:'grey', borderRadius:25}}
+                    style={styles.accessory}
                     size={20}
                     color='white'
                 />
@@ -28,11 +28,11 @@ export const Avatar = (props) => {
     )
 }
 
-export const AvatarCard = ({name, avatar, timestamp}) => {
+export const AvatarCard = ({name, avatar, timestamp, style}) => {
     return(
-        <View style={{flexDirection:'row', marginBottom:10}}>
+        <View style={{flexDirection:'row', ...style}}>
             <Avatar
-                uri={avatar.source.uri} 
+                uri={avatar.uri} 
                 size={40}
                 onPress={() => {}}
             />
@@ -47,3 +47,14 @@ export const AvatarCard = ({name, avatar, timestamp}) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    accessory:{
+        position:'absolute', 
+        padding:2, 
+        bottom:0, 
+        right:0, 
+        backgroundColor:'grey', 
+        borderRadius:25
+    }
+})

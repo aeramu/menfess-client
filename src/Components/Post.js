@@ -126,10 +126,11 @@ const Post = (props) => {
         <AvatarCard
             name={post.name}
             avatar={{
-                source:{uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'},
+                uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg',
                 size:40,
             }}
             timestamp={post.timestamp}
+            style={{marginBottom:8}}
         />
         <Text style={{fontSize:16}} >
             {post.body}

@@ -14,7 +14,18 @@ import {
   SetProfileScreen,
   WelcomeScreen,
   RoomListScreen,
+  RoomScreen,
 } from '../Screens'
+
+const RoomStack = createStackNavigator()
+const RoomStackScreen = () => {
+  return(
+    <RoomStack.Navigator>
+      <RoomStack.Screen name='RoomList' component={RoomListScreen}/>
+      <RoomStack.Screen name='Room' component={RoomScreen}/>
+    </RoomStack.Navigator>
+  )
+}
 
 const MainTabs = createBottomTabNavigator()
 const MainTabsScreen = () => {
@@ -42,7 +53,7 @@ const MainTabsScreen = () => {
       }}
       backBehavior='initialRoute'
     >
-      <MainTabs.Screen name='Room' component={RoomListScreen}/>
+      <MainTabs.Screen name='Room' component={RoomStackScreen}/>
       <MainTabs.Screen name='Home' component={HomeScreen}/>
       <MainTabs.Screen name='Notification' component={SetProfileScreen}/>
     </MainTabs.Navigator>

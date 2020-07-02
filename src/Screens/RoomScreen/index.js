@@ -2,12 +2,11 @@ import React from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
-import {ProfileContext} from '../../Context'
 import {PostCard, Avatar, FloatButton} from '../../Components'
 
 const POST_LIST = gql`
-  query($cursor: ID){
-    menfessPostList(first: 20, after: $cursor){
+  query($cursor: ID, $ids: [ID!]!){
+    menfessPostRooms(ids: $ids,first: 20, after: $cursor){
       edges{
         id
         timestamp
@@ -38,37 +37,38 @@ const POST_LIST = gql`
     }
   }
 `
-export default ({navigation}) => {
-  const {removeProfile, profileAvatar} = React.useContext(ProfileContext)
+export default ({navigation, route}) => {
+  const {id} = route.params
   const {loading, data, networkStatus, refetch, fetchMore} = useQuery(POST_LIST,{
     variables:{
+      ids: [id],
       cursor: null
     }
   })
 
-  const morePost = () => {
-    fetchMore({
-      variables:{
-        cursor: data.menfessPostList.pageInfo.endCursor
-      },
-      updateQuery: (previousResult, {fetchMoreResult}) => {
-        return {
-          menfessPostList:{
-            __typename: previousResult.menfessPostList.__typename,
-            edges: [...previousResult.menfessPostList.edges,...fetchMoreResult.menfessPostList.edges],
-            pageInfo: fetchMoreResult.menfessPostList.pageInfo
-          }
-        }
-      }
-    })
-  }
+  // const morePost = () => {
+  //   fetchMore({
+  //     variables:{
+  //       cursor: data.menfessPostList.pageInfo.endCursor
+  //     },
+  //     updateQuery: (previousResult, {fetchMoreResult}) => {
+  //       return {
+  //         menfessPostList:{
+  //           __typename: previousResult.menfessPostList.__typename,
+  //           edges: [...previousResult.menfessPostList.edges,...fetchMoreResult.menfessPostList.edges],
+  //           pageInfo: fetchMoreResult.menfessPostList.pageInfo
+  //         }
+  //       }
+  //     }
+  //   })
+  // }
 
   const handlePostClick = (post) => {
     navigation.navigate('Post', {post})
   }
 
   const handleNewPostClick = () => {
-    navigation.navigate('NewPost')
+    navigation.navigate('NewPost', {roomID: id})
   }
 
   if (loading) return (
@@ -82,10 +82,9 @@ export default ({navigation}) => {
       <FlatList
         refreshing={networkStatus === 4}
         onRefresh={() => refetch()}
-        onEndReached={() => morePost()}
-        onEndReachedThreshold={0.5}
-        data={data.menfessPostList.edges}
-        //ListHeaderComponent={<Button title='logout' onPress={() => removeProfile()}/>}
+        // onEndReached={() => morePost()}
+        // onEndReachedThreshold={0.5}
+        data={data.menfessPostRooms.edges}
         renderItem={({item}) => (
           <PostCard post={item} onPress={(post) => handlePostClick(post)} repost/>
         )}
