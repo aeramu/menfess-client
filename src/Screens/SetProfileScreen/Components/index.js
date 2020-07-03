@@ -1,0 +1,1 @@
+export {AvatarOverlay} from './AvatarOverlay'

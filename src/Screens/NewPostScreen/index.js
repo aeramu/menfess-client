@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, View} from 'react-native'
+import {ScrollView, View, StyleSheet} from 'react-native'
 import {Button, Input} from 'react-native-elements'
 import {ProfileContext} from '../../Context'
 import {Avatar, RoundedPost} from '../../Components'
@@ -38,9 +38,9 @@ export default ({navigation, route}) => {
       headerRight: () => (
         <Button
           title='Post'
-          buttonStyle={{borderRadius:20, paddingHorizontal:20, marginRight:20, height:35, backgroundColor:'#900e66'}} 
+          buttonStyle={styles.button} 
           disabled={disabled}
-          onPress={handlePost}      
+          onPress={() => handlePost()}      
         />
       )
     })
@@ -52,9 +52,15 @@ export default ({navigation, route}) => {
         name: profileName,
         avatar: profileAvatar,
         body,
-        parentID: route.params && route.params.post && !route.params.repost ? route.params.post.id : null,
-        repostID: route.params && route.params.post && route.params.repost ? route.params.post.id : null,
-        roomID: route.params && route.params.roomID ? route.params.roomID : null,
+        parentID: route.params && route.params.post && !route.params.repost 
+          ? route.params.post.id 
+          : null,
+        repostID: route.params && route.params.post && route.params.repost 
+          ? route.params.post.id 
+          : null,
+        roomID: route.params && route.params.roomID 
+          ? route.params.roomID 
+          : null,
       }
     })
     .then(() => {
@@ -63,27 +69,48 @@ export default ({navigation, route}) => {
   }
 
   return (
-    <ScrollView style={{flex:1, backgroundColor:'white', paddingHorizontal:15, paddingTop:20}}>
-      {route.params && route.params.post && !route.params.repost && <RoundedPost post={route.params.post}/>}
+    <ScrollView style={styles.container}>
+      {route.params && route.params.post && !route.params.repost && 
+        <RoundedPost post={route.params.post}/>
+      }
       <View style={{flexDirection:'row', marginTop: 20}}>
         <Avatar
           size={40}
           uri={profileAvatar}
         />
         <Input
-        containerStyle={{flex:1}}
+          containerStyle={{flex:1}}
           inputContainerStyle={{borderBottomWidth:0}}
           inputStyle={{fontSize:16}}
           autoFocus={true}
           multiline={true}
           placeholder='Write your post'
           onChangeText={(text) => {
-            setDisabled(text.length == 0? true : false)
+            setDisabled(text.length == 0)
             setBody(text)
           }}
         />
       </View>
-      {route.params && route.params.post && route.params.repost && <RoundedPost post={route.params.post}/>}
+      {route.params && route.params.post && route.params.repost && 
+        <RoundedPost post={route.params.post}/>
+      }
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  button:{
+    borderRadius:20, 
+    paddingHorizontal:20, 
+    marginRight:20, 
+    height:35, 
+    backgroundColor:'#900e66'
+  },
+  container:{
+    flex:1, 
+    backgroundColor:'white', 
+    paddingHorizontal:15, 
+    paddingTop:20
+  }
+
+})

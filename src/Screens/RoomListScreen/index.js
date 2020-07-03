@@ -4,10 +4,33 @@ import {
     FlatList,
     ActivityIndicator,
 } from 'react-native'
+import {RoomCard} from './Components'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
-import {RoomCard} from './Components'
+export default ({navigation}) => {
+    const {loading, data} = useQuery(ROOM_LIST)
+    if (loading) return (
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+          <ActivityIndicator size={50}/>
+        </View>
+    )
+
+    const handleRoomClick = (room) => {
+        navigation.navigate('Room',{room})
+    }
+
+    return(
+        <View style={{flex:1}}>
+        <FlatList
+            data={data.menfessRoomList.edges}
+            renderItem={({item}) => (
+                <RoomCard name={item.name} onPress={() => handleRoomClick(item)}/>
+            )}
+        />
+        </View>
+    )
+}
 
 const ROOM_LIST = gql `
     query{
@@ -19,27 +42,3 @@ const ROOM_LIST = gql `
         }
     }
 `
-
-export default ({navigation}) => {
-    const {loading, data} = useQuery(ROOM_LIST)
-    if (loading) return (
-        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-          <ActivityIndicator size={50}/>
-        </View>
-    )
-
-    const handleRoomClick = (id) => {
-        navigation.navigate('Room',{id})
-    }
-
-    return(
-        <View style={{flex:1}}>
-        <FlatList
-            data={data.menfessRoomList.edges}
-            renderItem={({item}) => (
-                <RoomCard name={item.name} onPress={() => handleRoomClick(item.id)}/>
-            )}
-        />
-        </View>
-    )
-}

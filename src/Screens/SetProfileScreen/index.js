@@ -1,20 +1,18 @@
 import React from 'react'
-import {View, FlatList} from 'react-native'
-import {Button, Input, Text, Overlay} from 'react-native-elements'
+import {View, StyleSheet} from 'react-native'
+import {Button, Input, Text} from 'react-native-elements'
 import {Avatar} from '../../Components'
-
+import {AvatarOverlay} from './Components'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
-
 import {ProfileContext} from '../../Context'
 
-const AVATAR_LIST = gql`
-  query{
-    menfessAvatarList
-  }
-`
 export default ({navigation}) => {
+  const {setProfile, profileName, profileAvatar} = React.useContext(ProfileContext)
   const [avatarList, setAvatarList] = React.useState([])
+  const [name, setName] = React.useState(profileName)
+  const [avatar, setAvatar] = React.useState(profileAvatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg')
+  const [visible, setVisible] = React.useState(false)
 
   useQuery(AVATAR_LIST,{
     onCompleted(data){
@@ -22,11 +20,10 @@ export default ({navigation}) => {
     }
   })
   
-  const {setProfile, profileName, profileAvatar} = React.useContext(ProfileContext)
-
-  const [name, setName] = React.useState(profileName)
-  const [avatar, setAvatar] = React.useState(profileAvatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg')
-  const [visible, setVisible] = React.useState(false)
+  const handleChooseAvatar = (avatar) => {
+    setAvatar(avatar)
+    setVisible(false)
+  }
 
   return (
     <View style={styles.container}>
@@ -56,31 +53,21 @@ export default ({navigation}) => {
           navigation.navigate('Home')
         }}
       />
-      <Overlay 
-        overlayStyle={{height:350}}
+      <AvatarOverlay
         isVisible={visible}
         onBackdropPress={() => setVisible(false)}
-      >
-        <FlatList
-          numColumns={3}
-          data={avatarList}
-          keyExtractor={(index) => index}
-          renderItem={({item}) => 
-            <Avatar
-              uri={item}
-              containerStyle={{margin:10}}
-              size={70}
-              onPress={() => {
-                setAvatar(item)
-                setVisible(false)
-              }}
-            />
-          }
-        />
-      </Overlay>
+        data={avatarList}
+        onPress={(avatar) => handleChooseAvatar(avatar)}
+      />
     </View>
   );
 }
+
+const AVATAR_LIST = gql`
+  query{
+    menfessAvatarList
+  }
+`
 
 const styles = StyleSheet.create({
   container:{

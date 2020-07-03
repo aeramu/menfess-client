@@ -4,44 +4,11 @@ import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
 import {PostCard, Avatar, FloatButton} from '../../Components'
 
-const POST_LIST = gql`
-  query($cursor: ID, $ids: [ID!]!){
-    menfessPostRooms(ids: $ids,first: 20, after: $cursor){
-      edges{
-        id
-        timestamp
-        name
-        avatar
-        body
-        replyCount
-        upvoteCount
-        downvoteCount
-        upvoted
-        downvoted
-        repost{
-          id
-          timestamp
-          name
-          avatar
-          body
-          replyCount
-          upvoteCount
-          downvoteCount
-          upvoted
-          downvoted
-        }
-      }
-      pageInfo{
-        endCursor
-      }
-    }
-  }
-`
 export default ({navigation, route}) => {
-  const {id} = route.params
+  const {room} = route.params
   const {loading, data, networkStatus, refetch, fetchMore} = useQuery(POST_LIST,{
     variables:{
-      ids: [id],
+      ids: [room.id],
       cursor: null
     }
   })
@@ -93,3 +60,37 @@ export default ({navigation, route}) => {
     </View>
   );
 }
+
+const POST_LIST = gql`
+  query($cursor: ID, $ids: [ID!]!){
+    menfessPostRooms(ids: $ids,first: 20, after: $cursor){
+      edges{
+        id
+        timestamp
+        name
+        avatar
+        body
+        replyCount
+        upvoteCount
+        downvoteCount
+        upvoted
+        downvoted
+        repost{
+          id
+          timestamp
+          name
+          avatar
+          body
+          replyCount
+          upvoteCount
+          downvoteCount
+          upvoted
+          downvoted
+        }
+      }
+      pageInfo{
+        endCursor
+      }
+    }
+  }
+`

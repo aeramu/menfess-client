@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {NavigationContainer} from '@react-navigation/native'
 import {View, Image} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
 import {Avatar} from '../Components'
 import {ProfileContext} from '../Context'
 
@@ -17,15 +18,15 @@ import {
   RoomScreen,
 } from '../Screens'
 
-const RoomStack = createStackNavigator()
-const RoomStackScreen = () => {
-  return(
-    <RoomStack.Navigator>
-      <RoomStack.Screen name='RoomList' component={RoomListScreen}/>
-      <RoomStack.Screen name='Room' component={RoomScreen}/>
-    </RoomStack.Navigator>
-  )
-}
+// const RoomStack = createStackNavigator()
+// const RoomStackScreen = () => {
+//   return(
+//     <RoomStack.Navigator>
+//       <RoomStack.Screen name='RoomList' component={RoomListScreen}/>
+//       <RoomStack.Screen name='Room' component={RoomScreen}/>
+//     </RoomStack.Navigator>
+//   )
+// }
 
 const MainTabs = createBottomTabNavigator()
 const MainTabsScreen = () => {
@@ -36,15 +37,21 @@ const MainTabsScreen = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === 'Home') {
-            iconName = focused
-              ? 'ios-information-circle'
-              : 'ios-information-circle-outline';
-          } else if (route.name === 'Room') {
             iconName = focused 
-              ? 'ios-list-box' 
-              : 'ios-list';
+              ? 'home-variant'
+              : 'home-variant-outline'
+              return <MaterialCommunity name={iconName} size={size} color={color} />;
+          } else if (route.name === 'RoomList') {
+            iconName = focused 
+              ? 'door-open'
+              : 'door-closed'
+              return <MaterialCommunity name={iconName} size={size} color={color}/>
+          } else if (route.name === 'Notification'){
+            iconName = focused
+              ? 'ios-notifications'
+              : 'ios-notifications-outline'
+              return <Ionicons name={iconName} size={size} color={color} />;
           }
-          return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
       tabBarOptions={{
@@ -53,7 +60,9 @@ const MainTabsScreen = () => {
       }}
       backBehavior='initialRoute'
     >
-      <MainTabs.Screen name='Room' component={RoomStackScreen}/>
+      <MainTabs.Screen name='RoomList' component={RoomListScreen} options={{
+        title:'Room'
+      }}/>
       <MainTabs.Screen name='Home' component={HomeScreen}/>
       <MainTabs.Screen name='Notification' component={SetProfileScreen}/>
     </MainTabs.Navigator>
@@ -98,7 +107,12 @@ const MainStackScreen = () => {
       <MainStack.Screen name='NewPost' component={NewPostScreen} options={{
         title: ''
       }}/>
-      <MainStack.Screen name='Profile' component={SetProfileScreen} headerMode='none'/>
+      <MainStack.Screen name='Profile' component={SetProfileScreen}/>
+      <MainStack.Screen name='Room' component={RoomScreen} options={
+        ({route}) => ({
+          title:route.params.room.name
+        })
+      }/>
     </MainStack.Navigator>
   )
 }
