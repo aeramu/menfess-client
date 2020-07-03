@@ -60,6 +60,18 @@ const POST_QUERY = gql`
       downvoteCount
       upvoted
       downvoted
+      repost{
+        id
+        timestamp
+        name
+        avatar
+        body
+        replyCount
+        upvoteCount
+        downvoteCount
+        upvoted
+        downvoted
+      }
       child{
         edges{
           id
