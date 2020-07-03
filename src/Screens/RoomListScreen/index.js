@@ -25,7 +25,12 @@ export default ({navigation}) => {
         <FlatList
             data={data.menfessRoomList.edges}
             renderItem={({item}) => (
-                <RoomCard name={item.name} onPress={() => handleRoomClick(item)}/>
+                <RoomCard 
+                    name={item.name} 
+                    description={item.description}
+                    avatar={item.avatar} 
+                    onPress={() => handleRoomClick(item)}
+                />
             )}
         />
         </View>

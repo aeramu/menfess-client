@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, View, StyleSheet} from 'react-native'
+import {ScrollView, View, StyleSheet, TextInput} from 'react-native'
 import {Button, Input} from 'react-native-elements'
 import {ProfileContext} from '../../Context'
 import {Avatar, RoundedPost} from '../../Components'
@@ -71,9 +71,12 @@ export default ({navigation, route}) => {
   return (
     <ScrollView style={styles.container}>
       {route.params && route.params.post && !route.params.repost && 
-        <RoundedPost post={route.params.post}/>
+        <>
+          <RoundedPost post={route.params.post}/>
+          <View style={{marginBottom:20}}/>
+        </>
       }
-      <View style={{flexDirection:'row', marginTop: 20}}>
+      <View style={{flexDirection:'row'}}>
         <Avatar
           size={40}
           uri={profileAvatar}

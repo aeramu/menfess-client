@@ -8,7 +8,7 @@ import {
 } from 'react-native-elements'
 import {AvatarCard} from '../../../Components'
 
-export const RoomCard = ({name, onPress, uri}) => {
+export const RoomCard = ({name, description, onPress, avatar}) => {
     return(
         <TouchableOpacity
             style={styles.container} 
@@ -17,8 +17,8 @@ export const RoomCard = ({name, onPress, uri}) => {
         >
             <AvatarCard 
                 title={name}
-                subtitle='deskripsi menfess'
-                avatar={{uri: uri || 'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'}}
+                subtitle={description || ''}
+                avatar={{uri: avatar || 'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg'}}
                 style={styles.avatarCard}
             />
             <Divider/>

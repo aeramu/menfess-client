@@ -16,6 +16,7 @@ import {
   WelcomeScreen,
   RoomListScreen,
   RoomScreen,
+  NotificationsScreen,
 } from '../Screens'
 
 // const RoomStack = createStackNavigator()
@@ -46,7 +47,7 @@ const MainTabsScreen = () => {
               ? 'door-open'
               : 'door-closed'
               return <MaterialCommunity name={iconName} size={size} color={color}/>
-          } else if (route.name === 'Notification'){
+          } else if (route.name === 'Notifications'){
             iconName = focused
               ? 'ios-notifications'
               : 'ios-notifications-outline'
@@ -64,7 +65,7 @@ const MainTabsScreen = () => {
         title:'Room'
       }}/>
       <MainTabs.Screen name='Home' component={HomeScreen}/>
-      <MainTabs.Screen name='Notification' component={SetProfileScreen}/>
+      <MainTabs.Screen name='Notifications' component={NotificationsScreen}/>
     </MainTabs.Navigator>
   )
 }

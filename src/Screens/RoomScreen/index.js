@@ -2,7 +2,7 @@ import React from 'react'
 import {View, FlatList, ActivityIndicator} from 'react-native'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
-import {PostCard, Avatar, FloatButton} from '../../Components'
+import {PostCard, FloatButton} from '../../Components'
 
 export default ({navigation, route}) => {
   const {room} = route.params
@@ -35,7 +35,7 @@ export default ({navigation, route}) => {
   }
 
   const handleNewPostClick = () => {
-    navigation.navigate('NewPost', {roomID: id})
+    navigation.navigate('NewPost', {roomID: room.id})
   }
 
   if (loading) return (
