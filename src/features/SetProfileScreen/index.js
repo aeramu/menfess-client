@@ -1,11 +1,11 @@
 import React from 'react'
 import {View, StyleSheet} from 'react-native'
 import {Button, Input, Text} from 'react-native-elements'
-import {Avatar} from '../../Components'
+import {Avatar} from '../../components'
 import {AvatarOverlay} from './Components'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
-import {ProfileContext} from '../../Context'
+import {ProfileContext} from '../../context'
 
 export default ({navigation}) => {
   const {setProfile, profileName, profileAvatar} = React.useContext(ProfileContext)

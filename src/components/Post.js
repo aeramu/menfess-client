@@ -123,7 +123,7 @@ const PostCardFooter = (props) => {
 const Post = (props) => {
     const {post} = props
     return(
-      <View style={{paddingLeft:15, paddingTop:15}}>
+      <View style={{paddingHorizontal:15, paddingTop:15}}>
         <AvatarCard
             avatar={{
                 uri:post.avatar||'https://qiup-image.s3.amazonaws.com/avatar/avatar.jpg',

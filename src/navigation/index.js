@@ -5,8 +5,8 @@ import {NavigationContainer} from '@react-navigation/native'
 import {View, Image} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
-import {Avatar} from '../Components'
-import {ProfileContext} from '../Context'
+import {Avatar} from '../components'
+import {ProfileContext} from '../context'
 
 import {
   HomeScreen,
@@ -17,7 +17,7 @@ import {
   RoomListScreen,
   RoomScreen,
   NotificationsScreen,
-} from '../Screens'
+} from '../features'
 
 // const RoomStack = createStackNavigator()
 // const RoomStackScreen = () => {

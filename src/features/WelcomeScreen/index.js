@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import {Button} from 'react-native-elements'
-import {ProfileContext} from '../../Context'
+import {ProfileContext} from '../../context'
 
 export default ({navigation}) => {
   const {setID} = React.useContext(ProfileContext)

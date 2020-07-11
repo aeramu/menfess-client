@@ -4,7 +4,7 @@ import {
   ActivityIndicator, 
   FlatList 
 } from 'react-native'
-import {PostCard} from '../../Components'
+import {PostCard} from '../../components'
 import {Divider} from 'react-native-elements'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'

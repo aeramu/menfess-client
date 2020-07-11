@@ -6,7 +6,7 @@ import {
 import {
     Divider,
 } from 'react-native-elements'
-import {AvatarCard} from '../../../Components'
+import {AvatarCard} from '../../../components'
 
 export const RoomCard = ({name, description, onPress, avatar}) => {
     return(

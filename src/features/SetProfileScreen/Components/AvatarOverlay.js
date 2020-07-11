@@ -1,7 +1,7 @@
 import React from 'react'
 import {FlatList} from 'react-native'
 import {Overlay} from 'react-native-elements'
-import {Avatar} from '../../../Components'
+import {Avatar} from '../../../components'
 
 export const AvatarOverlay = (props) => {
     const {data, onPress} = props

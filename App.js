@@ -5,10 +5,10 @@ import {AppLoading} from 'expo'
 import {Asset} from 'expo-asset'
 import {CacheManager} from 'react-native-expo-image-cache'
 
-import {client} from './src/Config/Graphql';
-import {ProfileContext} from './src/Context'
+import {client} from './src/config/Graphql';
+import {ProfileContext} from './src/context'
 
-import Navigator from './src/Navigation'
+import Navigator from './src/navigation'
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
