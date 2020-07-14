@@ -1,5 +1,5 @@
 import React from 'react'
-import {TouchableOpacity, View} from 'react-native'
+import {TouchableOpacity, View, Linking} from 'react-native'
 import {Button, Divider, Text} from 'react-native-elements'
 import {useNavigation} from '@react-navigation/native'
 import {AvatarCard} from './Avatar'
@@ -8,6 +8,7 @@ import moment from 'moment'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost';
+import HyperLink from 'react-native-hyperlink'
 
 const UPVOTE_POST = gql`
   mutation($postID: ID!){
@@ -133,9 +134,11 @@ const Post = (props) => {
             subtitle={moment.unix(post.timestamp).fromNow()}
             style={{marginBottom:8}}
         />
+        <HyperLink linkDefault linkStyle={{color:'blue'}}>
         <Text style={{fontSize:16}} >
             {post.body}
         </Text>
+        </HyperLink>
       </View>
     )
 }
