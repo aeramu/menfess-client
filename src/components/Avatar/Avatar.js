@@ -1,6 +1,6 @@
 import React from 'react'
 import {Image} from 'react-native-expo-image-cache'
-import {TouchableOpacity, View, Text, StyleSheet} from 'react-native'
+import {TouchableOpacity, StyleSheet} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export const Avatar = (props) => {
@@ -27,26 +27,6 @@ export const Avatar = (props) => {
     )
 }
 
-export const AvatarCard = ({title, avatar, subtitle, style}) => {
-    return(
-        <View style={{flexDirection:'row', ...style}}>
-            <Avatar
-                uri={avatar.uri} 
-                size={40}
-                onPress={() => {}}
-            />
-            <View style={{marginLeft:10}}>
-                <Text style={styles.title}>
-                    {title}
-                </Text>
-                <Text style={styles.subtitle}>
-                    {subtitle}
-                </Text>
-            </View>
-        </View>
-    )
-}
-
 const styles = StyleSheet.create({
     accessory:{
         position:'absolute', 
@@ -55,13 +35,5 @@ const styles = StyleSheet.create({
         right:0, 
         backgroundColor:'grey', 
         borderRadius:25
-    },
-    title:{
-        fontWeight:'bold', 
-        fontSize:16,
-    },
-    subtitle:{
-        color:'grey',
-        fontSize:12,
     }
 })

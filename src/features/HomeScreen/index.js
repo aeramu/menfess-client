@@ -71,11 +71,12 @@ export default ({navigation}) => {
 
 const POST_LIST = gql`
   query($cursor: ID){
-    menfessPostList(first: 20, after: $cursor){
+    menfessPostList(first: 50, after: $cursor){
       edges{
         id
         timestamp
         name
+        room
         avatar
         body
         replyCount
@@ -89,6 +90,7 @@ const POST_LIST = gql`
           name
           avatar
           body
+          room
           replyCount
           upvoteCount
           downvoteCount
