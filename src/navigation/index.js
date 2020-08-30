@@ -18,7 +18,7 @@ import {
   RoomScreen,
   NotificationsScreen,
   RoomChooseScreen
-} from '../features'
+} from '../screens'
 
 const NewPostStack = createStackNavigator()
 const NewPostStackScreen = () => {
