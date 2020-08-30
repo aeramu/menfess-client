@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Avatar } from '../Avatar'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-export default ({name, uri, room}) => {
+export default ({name, uri, room, onRoomPress}) => {
     return(
         <View style={styles.container}>
             <Avatar
@@ -12,7 +12,7 @@ export default ({name, uri, room}) => {
             />
             <View style={styles.textContainer}>
                 <Text style={styles.name}>{name}</Text>
-                <TouchableOpacity style={styles.room}>
+                <TouchableOpacity style={styles.room} onPress={() => onRoomPress()}>
                     <Text style={styles.roomText}>{room}</Text>
                     <Icon
                         name='caretdown'

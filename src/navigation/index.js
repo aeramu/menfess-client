@@ -17,17 +17,18 @@ import {
   RoomListScreen,
   RoomScreen,
   NotificationsScreen,
+  RoomChooseScreen
 } from '../features'
 
-// const RoomStack = createStackNavigator()
-// const RoomStackScreen = () => {
-//   return(
-//     <RoomStack.Navigator>
-//       <RoomStack.Screen name='RoomList' component={RoomListScreen}/>
-//       <RoomStack.Screen name='Room' component={RoomScreen}/>
-//     </RoomStack.Navigator>
-//   )
-// }
+const NewPostStack = createStackNavigator()
+const NewPostStackScreen = () => {
+  return(
+    <NewPostStack.Navigator>
+      <NewPostStack.Screen name='NewPost' component={NewPostScreen}/>
+      <NewPostStack.Screen name='RoomChoose' component={RoomChooseScreen}/>
+    </NewPostStack.Navigator>
+  )
+}
 
 const MainTabs = createBottomTabNavigator()
 const MainTabsScreen = () => {
@@ -105,7 +106,7 @@ const MainStackScreen = () => {
         )
       })}/>
       <MainStack.Screen name='Post' component={PostScreen}/>
-      <MainStack.Screen name='NewPost' component={NewPostScreen} options={{
+      <MainStack.Screen name='NewPost' component={NewPostStackScreen} options={{
         title: ''
       }}/>
       <MainStack.Screen name='Profile' component={SetProfileScreen}/>

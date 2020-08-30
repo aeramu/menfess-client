@@ -76,29 +76,24 @@ export default ({navigation, route}) => {
           <View style={{marginBottom:20}}/>
         </>
       }
-      {/* <View style={{flexDirection:'row'}}> 
-        <Avatar
-          size={40}
-          uri={profileAvatar}
-        />*/}
       <NewPostAvatar
         name={profileName}
         uri={profileAvatar}
         room='@General'
+        onRoomPress={() => navigation.navigate('RoomChoose')}
       />
-        <Input
-          containerStyle={{flex:1}}
-          inputContainerStyle={{borderBottomWidth:0}}
-          inputStyle={{fontSize:16}}
-          autoFocus={true}
-          multiline={true}
-          placeholder='Write your post'
-          onChangeText={(text) => {
-            setDisabled(text.length == 0)
-            setBody(text)
-          }}
-        />
-      {/* </View> */}
+      <Input
+        containerStyle={{flex:1}}
+        inputContainerStyle={{borderBottomWidth:0}}
+        inputStyle={{fontSize:16}}
+        autoFocus={true}
+        multiline={true}
+        placeholder='Write your post'
+        onChangeText={(text) => {
+          setDisabled(text.length == 0)
+          setBody(text)
+        }}
+      />
       {route.params && route.params.post && route.params.repost && 
         <RoundedPost post={route.params.post}/>
       }

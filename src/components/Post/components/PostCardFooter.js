@@ -69,10 +69,16 @@ export const PostCardFooter = (props) => {
             />
             <CommentButton 
                 count={post.replyCount.toString()}
-                onPress={() => navigation.navigate('NewPost',{post})}
+                onPress={() => navigation.navigate('NewPost',{
+                    screen:'NewPost',
+                    params: {post}
+                })}
             />
             <RepostButton
-                onPress={() => navigation.navigate('NewPost',{post, repost:true})}
+                onPress={() => navigation.navigate('NewPost',{
+                    screen:'NewPost',
+                    params:{post, repost:true}
+                })}
             />
         </View>
     )

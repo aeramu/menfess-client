@@ -35,7 +35,10 @@ export default ({navigation, route}) => {
   }
 
   const handleNewPostClick = () => {
-    navigation.navigate('NewPost', {roomID: room.id})
+    navigation.navigate('NewPost', {
+      screen:'NewPost',
+      params:{roomID: room.id}
+    })
   }
 
   if (loading) return (
