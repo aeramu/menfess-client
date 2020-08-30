@@ -1,13 +1,13 @@
 import React from 'react'
 import {Button} from 'react-native-elements'
 
-export const CommentButton = ({onPress, count}) => {
+export default ({onPress}) => {
     return(
         <Button 
             containerStyle={{flex:1}} 
-            icon={{name:'comment-o', type:'font-awesome', color:'grey', size:16}}
-            title={count.toString()}
+            icon={{name:'twitter-retweet', type:'material-community', color:'grey', size:22}}
             titleStyle={{color:'grey'}}
+            title=' '
             type='clear'
             onPress={() => onPress()}
         />

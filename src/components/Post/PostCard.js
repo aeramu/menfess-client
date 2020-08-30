@@ -1,9 +1,9 @@
 import React from 'react'
 import {TouchableOpacity, View} from 'react-native'
 import {Divider} from 'react-native-elements'
-import {Post} from './Post'
+import Post from './components/Post'
 import {RoundedPost} from './RoundedPost'
-import {PostCardFooter} from './components'
+import PostCardFooter from './components/PostCardFooter'
 
 
 export const PostCard = (props) => {

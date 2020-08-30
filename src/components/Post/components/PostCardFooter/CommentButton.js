@@ -1,13 +1,13 @@
 import React from 'react'
 import {Button} from 'react-native-elements'
 
-export const RepostButton = ({onPress}) => {
+export default ({onPress, count}) => {
     return(
         <Button 
             containerStyle={{flex:1}} 
-            icon={{name:'twitter-retweet', type:'material-community', color:'grey', size:22}}
+            icon={{name:'comment-o', type:'font-awesome', color:'grey', size:16}}
+            title={count.toString()}
             titleStyle={{color:'grey'}}
-            title=' '
             type='clear'
             onPress={() => onPress()}
         />

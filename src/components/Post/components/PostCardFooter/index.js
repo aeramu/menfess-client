@@ -1,17 +1,15 @@
 import React from 'react'
 import {View} from 'react-native'
-import {
-    UpvoteButton, 
-    DownvoteButton, 
-    CommentButton, 
-    RepostButton
-} from '.'
+import UpvoteButton from './UpvoteButton' 
+import DownvoteButton from './DownvoteButton' 
+import CommentButton from './CommentButton' 
+import RepostButton from './RepostButton'
 
 import {useNavigation} from '@react-navigation/native'
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 
-export const PostCardFooter = (props) => {
+export default (props) => {
     const {post} = props
     const navigation = useNavigation()
     const [upvote] = useMutation(UPVOTE_POST)

@@ -1,7 +1,7 @@
 import React from 'react'
 import {TouchableOpacity} from 'react-native'
 
-import {Post} from './Post'
+import Post from './components/Post'
 
 export const RoundedPost = (props) => {
     const {post, onPress} = props

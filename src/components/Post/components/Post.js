@@ -1,10 +1,10 @@
 import React from 'react'
 import {View, Text} from 'react-native'
-import {AvatarCard} from '../Avatar'
+import {AvatarCard} from '../../Avatar'
 import moment from 'moment'
 import HyperLink from 'react-native-hyperlink'
 
-export const Post = (props) => {
+export default (props) => {
     const {post} = props
     return(
       <View style={{paddingHorizontal:15, paddingTop:15}}>

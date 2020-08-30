@@ -2,7 +2,7 @@ import React from 'react'
 import {Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-export const DownvoteButton = ({isVoted, voteCount, onPress}) => {
+export default ({isVoted, voteCount, onPress}) => {
     return(
         <Button 
             containerStyle={{flex:1}} 

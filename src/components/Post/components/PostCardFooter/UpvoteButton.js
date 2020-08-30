@@ -2,7 +2,7 @@ import React from 'react'
 import {Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-export const UpvoteButton = ({voteCount, isVoted, onPress}) => {
+export default ({voteCount, isVoted, onPress}) => {
     const icon = () => {
         const name = isVoted? 'smile-circle' : 'smileo'
         return (
