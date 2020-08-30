@@ -1,11 +1,9 @@
 import React from 'react'
 import { 
   View, 
-  ActivityIndicator, 
-  FlatList 
+  ActivityIndicator
 } from 'react-native'
-import {PostCard} from '../../components'
-import {Divider} from 'react-native-elements'
+import PostList from '../../components/PostList'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
@@ -29,19 +27,19 @@ export default ({navigation, route}) => {
 
   return (
     <View style={{flex:1}}>
-      <FlatList
+      <PostList
         refreshing={networkStatus === 4}
         onRefresh={() => refetch()}
         data={data.menfessPost.child.edges}
-        ListHeaderComponent={() =>
-          <> 
-            <PostCard post={data.menfessPost} repost onPress={() => {}}/>
-            <Divider style={{backgroundColor:'light-grey', height:20}}/>
-          </>
-        }
-        renderItem={({item}) => 
-          <PostCard post={item} onPress={(post) => handlePostClick(post)}/>
-        }
+        //TODO: pindahin ini ke PostList
+        // ListHeaderComponent={() =>
+        //   <> 
+        //     <PostCard post={data.menfessPost} repost onPress={() => {}}/>
+        //     <Divider style={{backgroundColor:'light-grey', height:20}}/>
+        //   </>
+        // }
+        header={data.menfessPost}
+        onItemPress={(post) => handlePostClick(post)}
       />
     </View>
   )
@@ -60,6 +58,7 @@ const POST_QUERY = gql`
       downvoteCount
       upvoted
       downvoted
+      room
       repost{
         id
         timestamp
@@ -71,6 +70,7 @@ const POST_QUERY = gql`
         downvoteCount
         upvoted
         downvoted
+        room
       }
       child{
         edges{
@@ -84,6 +84,7 @@ const POST_QUERY = gql`
           downvoteCount
           upvoted
           downvoted
+          room
         }
       }
     }

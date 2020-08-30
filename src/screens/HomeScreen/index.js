@@ -1,13 +1,10 @@
 import React from 'react'
 import {
-  View, 
-  FlatList, 
+  View,
   ActivityIndicator
 } from 'react-native'
-import {
-  PostCard, 
-  FloatButton
-} from '../../components'
+import {FloatButton} from '../../components'
+import PostList from '../../components/PostList'
 import {useQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 
@@ -54,15 +51,13 @@ export default ({navigation}) => {
 
   return (
     <View style={{flex:1}}>
-      <FlatList
+      <PostList
         refreshing={networkStatus === 4}
         onRefresh={() => refetch()}
         onEndReached={() => morePost()}
         onEndReachedThreshold={0.5}
         data={data.menfessPostList.edges}
-        renderItem={({item}) => (
-          <PostCard post={item} onPress={(post) => handlePostClick(post)} repost/>
-        )}
+        onItemPress={(post)=>handlePostClick(post)}
       />
       <FloatButton onPress={() => handleNewPostClick()}/>
     </View>
