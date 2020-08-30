@@ -1,10 +1,9 @@
 import React from 'react'
 import {
     View,
-    FlatList,
     ActivityIndicator,
 } from 'react-native'
-import {RoomCard} from './Components'
+import RoomList from '../../components/RoomList'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
@@ -22,17 +21,10 @@ export default ({navigation}) => {
 
     return(
         <View style={{flex:1}}>
-        <FlatList
-            data={data.menfessRoomList.edges}
-            renderItem={({item}) => (
-                <RoomCard 
-                    name={item.name} 
-                    description={item.description}
-                    avatar={item.avatar} 
-                    onPress={() => handleRoomClick(item)}
-                />
-            )}
-        />
+            <RoomList
+                data={data.menfessRoomList.edges}
+                onItemPress={(item) => handleRoomClick(item)}
+            />
         </View>
     )
 }

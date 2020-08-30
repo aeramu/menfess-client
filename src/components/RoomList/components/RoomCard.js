@@ -6,9 +6,9 @@ import {
 import {
     Divider,
 } from 'react-native-elements'
-import {AvatarCard} from '../../../components'
+import {AvatarCard} from '../../Avatar'
 
-export const RoomCard = ({name, description, onPress, avatar}) => {
+export default ({name, description, onPress, avatar}) => {
     return(
         <TouchableOpacity
             style={styles.container} 
