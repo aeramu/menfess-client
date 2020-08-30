@@ -37,7 +37,7 @@ export default ({navigation, route}) => {
   const handleNewPostClick = () => {
     navigation.navigate('NewPost', {
       screen:'NewPost',
-      params:{roomID: room.id}
+      params:{room}
     })
   }
 

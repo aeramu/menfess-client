@@ -58,8 +58,8 @@ export default ({navigation, route}) => {
         repostID: route.params && route.params.post && route.params.repost 
           ? route.params.post.id 
           : null,
-        roomID: route.params && route.params.roomID 
-          ? route.params.roomID 
+        roomID: route.params && route.params.room
+          ? route.params.room.id
           : null,
       }
     })
@@ -67,6 +67,10 @@ export default ({navigation, route}) => {
       navigation.goBack()
     })
   }
+
+  const room = route.params && route.params.room
+    ? route.params.room.name
+    : 'General'
 
   return (
     <ScrollView style={styles.container}>
@@ -79,7 +83,7 @@ export default ({navigation, route}) => {
       <NewPostAvatar
         name={profileName}
         uri={profileAvatar}
-        room='@General'
+        room={'@' + room}
         onRoomPress={() => navigation.navigate('RoomChoose')}
       />
       <Input

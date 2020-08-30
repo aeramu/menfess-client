@@ -107,7 +107,8 @@ const MainStackScreen = () => {
       })}/>
       <MainStack.Screen name='Post' component={PostScreen}/>
       <MainStack.Screen name='NewPost' component={NewPostStackScreen} options={{
-        title: ''
+        title: '',
+        headerShown:false
       }}/>
       <MainStack.Screen name='Profile' component={SetProfileScreen}/>
       <MainStack.Screen name='Room' component={RoomScreen} options={
