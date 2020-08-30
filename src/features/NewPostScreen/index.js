@@ -1,8 +1,8 @@
 import React from 'react'
-import {ScrollView, View, StyleSheet, TextInput} from 'react-native'
+import {ScrollView, View, StyleSheet} from 'react-native'
 import {Button, Input} from 'react-native-elements'
 import {ProfileContext} from '../../context'
-import {Avatar, RoundedPost} from '../../components'
+import {Avatar, RoundedPost, NewPostAvatar} from '../../components'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
@@ -76,11 +76,16 @@ export default ({navigation, route}) => {
           <View style={{marginBottom:20}}/>
         </>
       }
-      <View style={{flexDirection:'row'}}>
+      {/* <View style={{flexDirection:'row'}}> 
         <Avatar
           size={40}
           uri={profileAvatar}
-        />
+        />*/}
+      <NewPostAvatar
+        name={profileName}
+        uri={profileAvatar}
+        room='@General'
+      />
         <Input
           containerStyle={{flex:1}}
           inputContainerStyle={{borderBottomWidth:0}}
@@ -93,7 +98,7 @@ export default ({navigation, route}) => {
             setBody(text)
           }}
         />
-      </View>
+      {/* </View> */}
       {route.params && route.params.post && route.params.repost && 
         <RoundedPost post={route.params.post}/>
       }
@@ -115,5 +120,4 @@ const styles = StyleSheet.create({
     paddingHorizontal:15, 
     paddingTop:20
   }
-
 })

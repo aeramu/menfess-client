@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native'
 import {Divider} from 'react-native-elements'
 import {Post} from './Post'
 import {RoundedPost} from './RoundedPost'
-import {PostCardFooter} from './PostCardFooter'
+import {PostCardFooter} from './components'
 
 
 export const PostCard = (props) => {
