@@ -8,7 +8,7 @@ import {
   SetProfileScreen,
   RoomScreen,
 } from '../../screens'
-import MainTabsScreen from '../MainTabs'
+import MainTabsScreen from './MainTabs'
 import NewPostStackScreen from './NewPostStack'
 
 import HeaderLogo from './components/HeaderLogo'
