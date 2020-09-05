@@ -44,7 +44,7 @@ export default ({navigation, route}) => {
         />
       )
     })
-  },[navigation, disabled])
+  },[navigation, disabled, body])
 
   const handlePost = () => {
     postMutation({
@@ -96,7 +96,6 @@ export default ({navigation, route}) => {
         onChangeText={(text) => {
           setDisabled(text.length == 0)
           setBody(text)
-          console.log(disabled)
         }}
       />
       {route.params && route.params.post && route.params.repost && 
