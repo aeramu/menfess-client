@@ -73,7 +73,7 @@ export default ({navigation, route}) => {
     : 'General'
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} keyboardShouldPersistTaps='always'>
       {route.params && route.params.post && !route.params.repost && 
         <>
           <RoundedPost post={route.params.post}/>
