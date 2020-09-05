@@ -7,9 +7,10 @@ import {
   PostScreen,
   SetProfileScreen,
   RoomScreen,
+  NewPostScreen,
+  RoomChooseScreen
 } from '../../screens'
 import MainTabsScreen from './MainTabs'
-import NewPostStackScreen from './NewPostStack'
 
 import HeaderLogo from './components/HeaderLogo'
 
@@ -37,9 +38,11 @@ export default () => {
             })}
         />
         <MainStack.Screen name='Post' component={PostScreen}/>
-        <MainStack.Screen name='NewPost' component={NewPostStackScreen} options={{
-            title: '',
-            headerShown:false
+        <MainStack.Screen name='NewPost' component={NewPostScreen} options={{
+            title:''
+        }}/>
+        <MainStack.Screen name='RoomChoose' component={RoomChooseScreen} options={{
+            title:''
         }}/>
         <MainStack.Screen name='Profile' component={SetProfileScreen}/>
         <MainStack.Screen name='Room' component={RoomScreen} options={

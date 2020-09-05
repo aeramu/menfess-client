@@ -36,10 +36,7 @@ export default ({navigation, route}) => {
   }
 
   const handleNewPostClick = () => {
-    navigation.navigate('NewPost', {
-      screen:'NewPost',
-      params:{room}
-    })
+    navigation.navigate('NewPost', {room})
   }
 
   if (loading) return (
@@ -77,6 +74,7 @@ const POST_LIST = gql`
         downvoteCount
         upvoted
         downvoted
+        room
         repost{
           id
           timestamp
@@ -88,6 +86,7 @@ const POST_LIST = gql`
           downvoteCount
           upvoted
           downvoted
+          room
         }
       }
       pageInfo{

@@ -2,7 +2,7 @@ import React from 'react'
 import {ScrollView, View, StyleSheet} from 'react-native'
 import {Button, Input} from 'react-native-elements'
 import {ProfileContext} from '../../context'
-import {Avatar, RoundedPost, NewPostAvatar} from '../../components'
+import {RoundedPost, NewPostAvatar} from '../../components'
 
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
@@ -44,7 +44,7 @@ export default ({navigation, route}) => {
         />
       )
     })
-  })
+  },[navigation, disabled])
 
   const handlePost = () => {
     postMutation({
@@ -96,6 +96,7 @@ export default ({navigation, route}) => {
         onChangeText={(text) => {
           setDisabled(text.length == 0)
           setBody(text)
+          console.log(disabled)
         }}
       />
       {route.params && route.params.post && route.params.repost && 

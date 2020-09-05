@@ -67,16 +67,10 @@ export default (props) => {
             />
             <CommentButton 
                 count={post.replyCount.toString()}
-                onPress={() => navigation.navigate('NewPost',{
-                    screen:'NewPost',
-                    params: {post}
-                })}
+                onPress={() => navigation.navigate('NewPost',{post})}
             />
             <RepostButton
-                onPress={() => navigation.navigate('NewPost',{
-                    screen:'NewPost',
-                    params:{post, repost:true}
-                })}
+                onPress={() => navigation.navigate('NewPost',{post, repost:true})}
             />
         </View>
     )
