@@ -35,6 +35,7 @@ const ROOM_LIST = gql `
             edges{
                 id
                 name
+                avatar
             }
         }
     }
