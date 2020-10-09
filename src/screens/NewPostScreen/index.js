@@ -2,7 +2,8 @@ import React from 'react'
 import {ScrollView, View, StyleSheet} from 'react-native'
 import {Button, Input} from 'react-native-elements'
 import {ProfileContext} from '../../context'
-import {RoundedPost, NewPostAvatar} from '../../components'
+import {RoundedPost} from '../../components'
+import NewPostAvatar from './components/NewPostAvatar'
 
 import {useMutation, gql} from '@apollo/client'
 
