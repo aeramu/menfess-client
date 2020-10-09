@@ -4,8 +4,7 @@ import {Button, Input} from 'react-native-elements'
 import {ProfileContext} from '../../context'
 import {RoundedPost, NewPostAvatar} from '../../components'
 
-import {useMutation} from '@apollo/react-hooks'
-import {gql} from 'apollo-boost'
+import {useMutation, gql} from '@apollo/client'
 
 
 const POST = gql`

@@ -3,8 +3,7 @@ import {View, StyleSheet} from 'react-native'
 import {Button, Input, Text} from 'react-native-elements'
 import {Avatar} from '../../components'
 import {AvatarOverlay} from './Components'
-import {gql} from 'apollo-boost'
-import {useQuery} from '@apollo/react-hooks'
+import {useQuery, gql} from '@apollo/client'
 import {ProfileContext} from '../../context'
 
 export default ({navigation}) => {

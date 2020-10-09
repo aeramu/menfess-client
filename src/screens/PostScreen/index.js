@@ -4,8 +4,7 @@ import {
   ActivityIndicator
 } from 'react-native'
 import PostList from '../../components/PostList'
-import {gql} from 'apollo-boost'
-import {useQuery} from '@apollo/react-hooks'
+import {useQuery, gql} from '@apollo/client'
 
 export default ({navigation, route}) => {
   const {post} = route.params

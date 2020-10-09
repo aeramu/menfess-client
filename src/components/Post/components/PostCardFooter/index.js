@@ -6,8 +6,7 @@ import CommentButton from './CommentButton'
 import RepostButton from './RepostButton'
 
 import {useNavigation} from '@react-navigation/native'
-import {useMutation} from '@apollo/react-hooks'
-import {gql} from 'apollo-boost'
+import {useMutation, gql} from '@apollo/client'
 
 export default (props) => {
     const {post} = props

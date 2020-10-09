@@ -1,7 +1,6 @@
 import React from 'react'
 import {View, ActivityIndicator} from 'react-native'
-import {useQuery} from '@apollo/react-hooks'
-import {gql} from 'apollo-boost';
+import {useQuery, gql} from '@apollo/client'
 import {FloatButton} from '../../components'
 import PostList from '../../components/PostList'
 

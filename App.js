@@ -1,11 +1,11 @@
 import React from 'react';
 import {AsyncStorage} from 'react-native'
-import {ApolloProvider} from '@apollo/react-hooks'
+import {ApolloProvider} from '@apollo/client'
 import {AppLoading} from 'expo'
 import {Asset} from 'expo-asset'
 import {CacheManager} from 'react-native-expo-image-cache'
 
-import {client} from './src/config/Graphql';
+import {client} from './src/config/graphql';
 import {ProfileContext} from './src/context'
 
 import Navigator from './src/navigation'

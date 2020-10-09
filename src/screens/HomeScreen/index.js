@@ -5,8 +5,7 @@ import {
 } from 'react-native'
 import {FloatButton} from '../../components'
 import PostList from '../../components/PostList'
-import {useQuery} from '@apollo/react-hooks'
-import {gql} from 'apollo-boost'
+import {useQuery, gql} from '@apollo/client'
 
 export default ({navigation}) => {
   const {loading, data, networkStatus, refetch, fetchMore} = useQuery(POST_LIST,{
@@ -48,6 +47,8 @@ export default ({navigation}) => {
       <ActivityIndicator size={50}/>
     </View>
   )
+
+  console.log(data)
 
   return (
     <View style={{flex:1}}>
